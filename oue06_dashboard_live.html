@@ -1145,7 +1145,19 @@ function setActiveTab(name) {
   Array.prototype.forEach.call(document.querySelectorAll('.tab-panel'), function(p){
     p.classList.toggle('active', p.id === 'tab-' + name);
   });
-  window.scrollTo({ top: 0 });
+  // Keep the sticky tab bar locked at the top when switching tabs while scrolled.
+  // - If the page is scrolled past the brand bar, snap to the brand-bar bottom
+  //   so the sticky nav sits at the top of the viewport and the new tab's
+  //   content starts right under it. Never auto-reveal the brand bar.
+  // - If the user is still at / above the brand bar, leave the scroll alone.
+  // User can scroll up manually if they want to see the header.
+  var brand = document.querySelector('.brand-bar');
+  if (brand) {
+    var brandBottom = brand.getBoundingClientRect().bottom + window.pageYOffset;
+    if (window.pageYOffset >= brandBottom - 4) {
+      window.scrollTo({ top: brandBottom, behavior: 'auto' });
+    }
+  }
 }
 
 function showAppShell(yes) {
