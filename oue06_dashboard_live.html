@@ -39,9 +39,9 @@ h2{font-size:22px;font-weight:700}
 h3{font-size:16px;font-weight:700;font-family:'Inter',sans-serif;color:var(--ink)}
 .accent{color:var(--ou-crimson)}
 
-.brand-bar{background:var(--ou-crimson);color:var(--ou-white);padding:14px 28px;display:flex;align-items:center;gap:18px;border-bottom:3px solid var(--ou-dark-crimson)}
-.brand-bar .logo{height:38px;flex:0 0 auto}
-.brand-bar .logo svg{height:100%;width:auto;display:block}
+.brand-bar{background:var(--ou-crimson);color:var(--ou-white);padding:18px 28px;display:flex;align-items:center;gap:22px;border-bottom:3px solid var(--ou-dark-crimson)}
+.brand-bar .logo{height:64px;flex:0 0 auto}
+.brand-bar .logo svg,.brand-bar .logo img{height:100%;width:auto;display:block;object-fit:contain}
 .brand-bar .title-block{display:flex;flex-direction:column;line-height:1.15}
 .brand-bar .eyebrow{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;opacity:0.85}
 .brand-bar .name{font-family:'Source Serif 4',serif;font-size:20px;font-weight:700;color:var(--ou-white)}
@@ -249,14 +249,187 @@ td.hm-cell.today{box-shadow:inset 0 0 0 2px var(--ou-crimson)}
 .brand-bar .pill.conn.error{background:rgba(255,255,255,0.22);border-color:rgba(255,255,255,0.45)}
 .banner.warn{background:#FCE6CC;color:#B85C00;border-bottom:1px solid #B85C00}
 
+
+/* Delivery forecast row */
+.df-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
+@media (max-width:1280px){.df-row{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.df-row{grid-template-columns:1fr}}
+.df-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;gap:8px}
+.df-card .df-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-3)}
+.df-card .df-num{font-family:'Source Serif 4',serif;font-size:42px;font-weight:700;color:var(--review);line-height:1}
+.df-card .df-num.crimson{color:var(--ou-crimson)}
+.df-card .df-sub{font-size:12px;color:var(--ink-3)}
+.df-card .df-bars{display:flex;flex-direction:column;gap:5px;margin-top:6px;padding-top:6px;border-top:1px dashed var(--line)}
+.df-bar-row{display:grid;grid-template-columns:64px 1fr auto;gap:8px;align-items:center;font-size:11px;color:var(--ink-2)}
+.df-bar-row .df-bl{font-weight:600;color:var(--ink-2)}
+.df-bar-track{position:relative;height:10px;background:var(--ou-light-gray);border-radius:3px;overflow:hidden}
+.df-bar-fill{position:absolute;left:0;top:0;bottom:0;border-radius:3px}
+.df-bar-val{font-variant-numeric:tabular-nums;color:var(--ink-3);white-space:nowrap;font-size:11px}
+.df-foot{display:flex;justify-content:space-between;font-size:11px;font-weight:600;color:var(--good);margin-top:6px;padding-top:6px;border-top:1px dashed var(--line)}
+.df-foot .df-forecast{color:var(--ink-3)}
+/* Calendar */
+.cal-wrap{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow-sm);margin-bottom:18px}
+.cal-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.cal-head .cal-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-3)}
+.cal-desc{font-size:12px;color:var(--ink-2);margin-bottom:10px;line-height:1.5}
+.cal-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--ink-2);margin-bottom:14px}
+.cal-legend .leg{display:inline-flex;align-items:center;gap:5px}
+.cal-legend .sw{width:12px;height:12px;border-radius:2px;display:inline-block}
+.cal-legend .sw.col-1{background:#2E78A1}.cal-legend .sw.col-2{background:#841617}.cal-legend .sw.col-3{background:#4F6B43}.cal-legend .sw.col-4{background:#B85C00}.cal-legend .sw.col-5{background:#6E5C40}
+.cal-legend .sw.dot-delivered{width:8px;height:8px;border-radius:50%;background:transparent;border:2px solid var(--good)}
+.cal-legend .sw.dot-shifted{width:8px;height:8px;border-radius:50%;background:transparent;border:2px solid var(--warn)}
+.cal-legend .sw.dot-today{width:8px;height:8px;border-radius:50%;background:transparent;border:2px dotted var(--ou-crimson)}
+.cal-grids{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+@media (max-width:1280px){.cal-grids{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:640px){.cal-grids{grid-template-columns:1fr}}
+.cal-grid{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px}
+.cal-grid .cal-month-name{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:6px;text-align:center}
+.cal-row{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}
+.cal-dow-row{margin-bottom:2px}
+.cal-dow{text-align:center;font-size:10px;color:var(--ink-3);font-weight:600;padding:2px 0}
+.cal-cell{position:relative;background:var(--card);border:1px solid var(--line);border-radius:3px;min-height:38px;padding:2px 4px;font-size:10px;color:var(--ink-3)}
+.cal-cell.cal-empty{background:transparent;border:0}
+.cal-day-num{font-size:10px;color:var(--ink-3);line-height:1}
+.cal-cell.has-deliveries{cursor:pointer}
+.cal-cell.has-deliveries:hover{background:#FCFBF9;transform:scale(1.05);transition:transform 100ms ease;z-index:2}
+.cal-day-count{font-size:14px;font-weight:700;color:var(--ink);text-align:center;line-height:1.6}
+.cal-cell.all-delivered{border:2px solid var(--good)}
+.cal-cell.shifted{border:2px solid var(--warn)}
+.cal-cell.all-delivered.shifted{border:2px solid var(--warn)}
+.cal-cell.today{outline:2px dotted var(--ou-crimson);outline-offset:1px}
+.cal-shift-badge{position:absolute;top:-4px;right:-4px;background:var(--warn);color:#fff;font-size:9px;font-weight:700;padding:1px 5px;border-radius:8px;line-height:1.4;min-width:18px;text-align:center}
+.cal-shift-badge.neg{background:var(--ou-crimson)}
+.cal-cell.cleaner .cal-day-count{display:none}
+.cal-cell.cleaner.has-deliveries .cal-day-num{font-weight:700;color:var(--ink);font-size:12px}
+/* Day-detail modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.45);display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px;animation:fade-in 150ms ease}
+@keyframes fade-in{from{opacity:0}to{opacity:1}}
+.modal-card{background:var(--card);border-radius:12px;padding:22px 24px;max-width:600px;width:100%;max-height:80vh;overflow-y:auto;box-shadow:var(--shadow-md)}
+.modal-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:12px}
+.modal-head h3{font-size:18px;font-family:'Source Serif 4',serif;color:var(--ink);margin:0}
+.modal-close{background:transparent;border:1px solid var(--line-2);width:32px;height:32px;border-radius:6px;cursor:pointer;font-size:18px;color:var(--ink-3);line-height:1;display:flex;align-items:center;justify-content:center}
+.modal-close:hover{background:var(--ou-light-gray)}
+.modal-section{margin-bottom:12px}
+.modal-section-head{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase}
+.modal-section-head.baseline{background:var(--good-bg);color:var(--good)}
+.modal-section-head.slipped{background:var(--warn-bg);color:var(--warn)}
+.modal-section-head.moved{background:var(--warn-bg);color:var(--warn)}
+.modal-section-head .ms-count{background:var(--card);padding:2px 8px;border-radius:4px;font-weight:700;font-size:11px}
+.modal-section-empty{padding:10px 8px;font-size:12px;color:var(--ink-3);font-style:italic;text-align:center}
+.modal-course-row{padding:10px 8px;border-bottom:1px solid var(--line);font-size:12px}
+.modal-course-row:last-child{border-bottom:0}
+.modal-course-row .mc-name{font-weight:600;color:var(--ink)}
+.modal-course-row .mc-meta{color:var(--ink-3);font-size:11px;margin-top:2px}
+.modal-course-row .mc-shift{font-size:11px;color:var(--ink-2);margin-top:4px}
+/* Delivery schedule list */
+.ds-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow-sm);margin-bottom:18px}
+.ds-card .ds-eyebrow{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}
+.ds-card .ds-desc{font-size:12px;color:var(--ink-2);margin-bottom:12px}
+.ds-controls{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.ds-controls .subtab-wrap{margin-bottom:0}
+.ds-controls .ds-search{font:inherit;font-size:13px;padding:7px 10px;border:1px solid var(--line-2);border-radius:6px;background:var(--card);flex:1;min-width:240px}
+.ds-controls .ds-export{display:flex;gap:6px;margin-left:auto}
+.ds-table-wrap{border:1px solid var(--line);border-radius:8px;overflow:hidden;max-height:540px;overflow-y:auto}
+table.ds-table{width:100%;border-collapse:collapse;font-size:12px}
+table.ds-table thead th{position:sticky;top:0;background:var(--ou-light-gray);color:var(--ink-2);padding:8px 10px;text-align:left;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border-bottom:1px solid var(--line-2);z-index:2}
+table.ds-table tbody td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.ds-table .ds-group-row td{background:#F5F7FB;font-weight:700;color:var(--review);font-size:12px;padding:6px 10px;border-top:1px solid var(--line-2);border-bottom:1px solid var(--line-2)}
+table.ds-table .ds-subj{display:inline-block;font-size:10px;padding:2px 7px;border-radius:999px;background:var(--subj-1-bg);color:var(--subj-1-ink);font-weight:600}
+table.ds-table .ds-status{display:inline-block;font-size:10px;padding:2px 7px;border-radius:999px;font-weight:600}
+table.ds-table .ds-slip-onTime{color:var(--good);font-weight:600}
+table.ds-table .ds-slip-early{color:var(--good);font-weight:600}
+table.ds-table .ds-slip-late{color:var(--risk);font-weight:600}
+table.ds-table .ds-slip-pending{color:var(--good);font-weight:600}
+
+
+/* Drill-down tab */
+.dd-filter-bar{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow-sm);margin-bottom:14px;display:grid;grid-template-columns:repeat(6,1fr) auto;gap:12px;align-items:end}
+@media (max-width:1280px){.dd-filter-bar{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){.dd-filter-bar{grid-template-columns:repeat(2,1fr)}}
+.dd-filter-bar label{display:flex;flex-direction:column;gap:3px;font-size:10px;color:var(--ink-3);font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+.dd-filter-bar input[type=search],.dd-filter-bar select,.dd-filter-bar input[type=range]{font:inherit;font-size:13px;padding:6px 8px;border:1px solid var(--line-2);border-radius:5px;background:var(--card);color:var(--ink);width:100%}
+.dd-filter-bar input[type=range]{padding:0}
+.dd-filter-bar .dd-reset{font:inherit;cursor:pointer;padding:7px 14px;border:1px solid var(--line-2);background:var(--card);border-radius:6px;font-size:12px;color:var(--ink-2);font-weight:600;align-self:end}
+.dd-filter-bar .dd-reset:hover{background:var(--ou-light-gray)}
+.dd-progress-display{font-size:11px;color:var(--ink-3);font-weight:600;margin-top:2px}
+
+.dd-select-bar{display:flex;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+.dd-pill{display:inline-flex;align-items:center;gap:6px;background:#FFF5C2;color:#8a6700;padding:6px 12px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase}
+.dd-pill::before{content:'';display:inline-block;width:6px;height:6px;border-radius:50%;background:#caa600}
+.dd-select-bar select.dd-course-pick{flex:1;font:inherit;font-size:14px;padding:8px 12px;border:1px solid var(--line-2);border-radius:6px;background:var(--card);color:var(--ink);min-width:280px}
+.dd-nav-btn{font:inherit;cursor:pointer;padding:7px 14px;border:1px solid var(--line-2);background:var(--card);border-radius:6px;font-size:13px;color:var(--ink-2);font-weight:600}
+.dd-nav-btn:hover:not(:disabled){background:var(--ou-light-gray)}
+.dd-nav-btn:disabled{opacity:0.4;cursor:not-allowed}
+
+.dd-course-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:14px;padding:20px 22px}
+.dd-course-title{font-family:'Source Serif 4',serif;font-size:24px;font-weight:700;color:var(--ink);margin-bottom:4px;line-height:1.2}
+.dd-course-sub{font-size:13px;color:var(--ink-3);margin-bottom:16px}
+.dd-course-sub b{color:var(--ink-2);font-weight:600}
+.dd-course-sub a{color:var(--ou-crimson);text-decoration:none;font-weight:600}
+.dd-course-sub a:hover{text-decoration:underline}
+.dd-course-sub .dd-phase-chip{display:inline-block;background:#FFF5C2;color:#8a6700;padding:2px 9px;border-radius:4px;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-left:4px}
+.dd-stat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+@media (max-width:1280px){.dd-stat-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){.dd-stat-grid{grid-template-columns:repeat(2,1fr)}}
+.dd-stat{background:var(--card);border-left:4px solid var(--line-2);padding:8px 14px}
+.dd-stat.s-done{border-left-color:var(--good);background:#F4F8F1}
+.dd-stat.s-pending{border-left-color:var(--warn);background:#FFF8EA}
+.dd-stat.s-late{border-left-color:var(--risk);background:#FDEEF0}
+.dd-stat .dd-stat-label{font-size:10px;font-weight:700;color:var(--ink-3);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:3px}
+.dd-stat .dd-stat-value{font-size:18px;font-weight:700;color:var(--ink);line-height:1.1}
+.dd-stat .dd-stat-sub{font-size:11px;color:var(--ink-3);margin-top:2px}
+
+.dd-workflow-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:14px;padding:18px 22px}
+.dd-workflow-card h3{font-size:18px;font-family:'Source Serif 4',serif;color:var(--ink);margin-bottom:4px}
+.dd-workflow-card .dd-wf-desc{font-size:12px;color:var(--ink-3);margin-bottom:12px;line-height:1.6}
+.dd-wf-squares{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.dd-wf-square{position:relative;width:42px;height:42px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--ou-white);cursor:default}
+.dd-wf-square.done{background:var(--good)}
+.dd-wf-square.wip{background:var(--review)}
+.dd-wf-square.late{background:var(--risk)}
+.dd-wf-square.ready{background:#E6BF00;color:#3D2D00}
+.dd-wf-square.yts{background:var(--ou-light-gray);color:var(--ink-3);border:1px dashed var(--line-2)}
+.dd-wf-square.review{background:var(--review)}
+.dd-wf-square.ring-qa{box-shadow:0 0 0 3px var(--risk),0 0 0 4px var(--ou-white) inset}
+.dd-wf-square.ring-final{box-shadow:0 0 0 3px var(--good),0 0 0 4px var(--ou-white) inset}
+.dd-wf-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--ink-2)}
+.dd-wf-legend .item{display:inline-flex;align-items:center;gap:6px}
+.dd-wf-legend .sq{width:14px;height:14px;border-radius:3px;display:inline-block}
+.dd-wf-legend .sq.done{background:var(--good)}
+.dd-wf-legend .sq.wip{background:var(--review)}
+.dd-wf-legend .sq.late{background:var(--risk)}
+.dd-wf-legend .sq.ready{background:#E6BF00}
+.dd-wf-legend .sq.yts{background:var(--ou-light-gray);border:1px dashed var(--line-2)}
+.dd-wf-legend .sq.ring-qa{background:var(--ou-white);box-shadow:inset 0 0 0 2px var(--risk)}
+.dd-wf-legend .sq.ring-final{background:var(--ou-white);box-shadow:inset 0 0 0 2px var(--good)}
+
+.dd-activities-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:18px 22px;margin-bottom:14px}
+.dd-activities-card h3{font-size:18px;font-family:'Source Serif 4',serif;color:var(--ink);margin-bottom:4px}
+.dd-activities-card .dd-act-sub{font-size:12px;color:var(--ink-3);margin-bottom:12px}
+.dd-act-table-wrap{border:1px solid var(--line);border-radius:8px;overflow:hidden}
+table.dd-act-table{width:100%;border-collapse:collapse;font-size:12px}
+table.dd-act-table thead th{background:var(--ou-light-gray);color:var(--ink-2);padding:8px 10px;text-align:left;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border-bottom:1px solid var(--line-2)}
+table.dd-act-table tbody td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.dd-act-table tbody tr:hover td{background:#FCFBF9}
+
+/* Make code-cells in the schedule list look clickable */
+.ds-table td.ds-clickable-code{cursor:pointer}
+.ds-table td.ds-clickable-code:hover .ds-code{color:var(--ou-crimson);text-decoration:underline}
+
 </style>
 </head>
 <body>
 
 <header class="brand-bar">
-  <a class="logo" href="https://www.ou.edu" target="_blank" rel="noopener" title="The University of Oklahoma" id="ou-logo-host"></a>
+  <a class="logo" href="https://oueducationservices.org" target="_blank" rel="noopener" title="OU Education Services" id="ou-logo-host">
+    <svg viewBox="0 0 130 78" xmlns="http://www.w3.org/2000/svg" aria-label="OU Education Services">
+      <text x="0" y="28" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="900" font-size="30" fill="white" letter-spacing="-1">OU</text>
+      <text x="0" y="52" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="800" font-size="15" fill="white" letter-spacing="1">EDUCATION</text>
+      <text x="0" y="72" font-family="Inter, Helvetica, Arial, sans-serif" font-weight="800" font-size="15" fill="white" letter-spacing="1">SERVICES</text>
+    </svg>
+  </a>
   <div class="title-block">
-    <span class="eyebrow">The University of Oklahoma · OUE06</span>
+    <span class="eyebrow">OU Education Services · OUE06</span>
     <span class="name">Master Tracker Dashboard</span>
   </div>
   <div class="right">
@@ -287,6 +460,7 @@ td.hm-cell.today{box-shadow:inset 0 0 0 2px var(--ou-crimson)}
 
 <nav class="topnav app" id="topnav">
   <button class="tab active" data-tab="narrative" type="button"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="17" y2="13"/><line x1="7" y1="17" x2="13" y2="17"/></svg>Delivery Status</button>
+  <button class="tab" data-tab="drilldown" type="button"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Drill-down</button>
   <button class="tab" data-tab="matrix" type="button"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Workflow Matrix</button>
   <button class="tab" data-tab="datewise" type="button"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>Date-wise</button>
   <button class="tab" data-tab="workload" type="button"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Team Workload</button>
@@ -298,6 +472,7 @@ td.hm-cell.today{box-shadow:inset 0 0 0 2px var(--ou-crimson)}
 
 <main class="app">
   <section id="tab-narrative" class="tab-panel active"></section>
+  <section id="tab-drilldown" class="tab-panel"></section>
   <section id="tab-matrix"    class="tab-panel"></section>
   <section id="tab-datewise"  class="tab-panel"></section>
   <section id="tab-workload"  class="tab-panel"></section>
@@ -318,7 +493,9 @@ td.hm-cell.today{box-shadow:inset 0 0 0 2px var(--ou-crimson)}
 (function injectLogo(){
   var host = document.getElementById('ou-logo-host');
   var src  = document.getElementById('ou-logo-svg');
-  if (host && src) host.innerHTML = src.textContent;
+  // Only inject the legacy inline SVG if the host hasn't been populated
+  // with a real <img> already (OU Education Services mark).
+  if (host && src && !host.hasChildNodes()) host.innerHTML = src.textContent;
 })();
 
 // ---------- DOM helper ----------
@@ -355,8 +532,8 @@ var STORAGE_KEY = 'oue06_dashboard_v3';
 // See OUE06_apps_script.gs for full deployment instructions.
 // ============================================================
 var CONFIG = {
-  APPS_SCRIPT_URL: 'https://script.google.com/a/macros/learningmate.com/s/AKfycbzc6d1H70y736XkTHct5AiMRfUYT8nD6tPAT6upkjxWpV1939bhO8b-MEi9d1T0J7jL/exec',          // e.g. 'https://script.google.com/macros/s/AKfycb.../exec'
-  AUTO_REFRESH_MIN: 1,          // 0 = disabled. e.g. 5 = re-fetch every 5 minutes
+  APPS_SCRIPT_URL: 'https://script.google.com/a/macros/learningmate.com/s/AKfycbzc6d1H70y736XkTHct5AiMRfUYT8nD6tPAT6upkjxWpV1939bhO8b-MEi9d1T0J7jL/exec',
+  AUTO_REFRESH_MIN: 0,          // 0 = disabled. e.g. 5 = re-fetch every 5 minutes
   FETCH_TIMEOUT_MS: 30000
 };
 
@@ -1011,6 +1188,7 @@ function wireUi() {
 function renderAll() {
   destroyCharts();
   renderNarrative();
+  renderDrilldown();
   renderMatrix();
   renderDatewise();
   renderWorkload();
@@ -1044,6 +1222,771 @@ function setTabBadge(name, n) {
   if (!badge) { badge = el('span', { class: 'badge' }); tab.appendChild(badge); }
   badge.textContent = String(n);
 }
+
+
+
+/* ============================================================
+ * DRILL-DOWN TAB
+ * Single-course detail view with filter bar, course picker
+ * (prev/next), KPI strip, workflow-square row, and activities
+ * table. Click-through from Delivery Status schedule list lands
+ * here with the course pre-selected.
+ * ============================================================ */
+var DD_STATE = {
+  selectedSrNo: null,
+  filters: { q: '', phase: '', owner: '', status: '', dueWindow: '', minPct: 0 }
+};
+
+function navigateToDrilldown(srNo) {
+  DD_STATE.selectedSrNo = srNo;
+  setActiveTab('drilldown');
+}
+
+function ddPhaseLabel(r) {
+  if (r.fully_done) return 'Delivered';
+  var i = r.current_stage_idx;
+  if (i == null || i < 0) return 'Not started';
+  return (i + 1) + '. ' + WORKFLOW_DEFS[i].short;
+}
+function ddCourseStatus(r) {
+  if (r.fully_done) return { label: 'COMPLETE', cls: 'done' };
+  if (r.late_count > 0) return { label: 'LATE', cls: 'late' };
+  var i = r.current_stage_idx;
+  if (i != null && i >= 0) {
+    var s = r.stages[i];
+    if (s.sCls === 'wip') return { label: 'IN PROGRESS', cls: 'wip' };
+    if (s.sCls === 'review') return { label: 'IN REVIEW', cls: 'review' };
+    if (s.sCls === 'yts') return { label: 'YET TO START', cls: 'yts' };
+  }
+  return { label: 'UNKNOWN', cls: 'unknown' };
+}
+
+function ddFilterCourses(slice) {
+  var f = DD_STATE.filters;
+  var today = new Date(); today.setHours(0,0,0,0);
+  return slice.filter(function(r) {
+    if (f.q) {
+      var q = f.q.toLowerCase();
+      var hay = ((r.course_code||'') + ' ' + (r.course_name||'') + ' ' + r.sr_no).toLowerCase();
+      if (hay.indexOf(q) < 0) return false;
+    }
+    if (f.phase && ddPhaseLabel(r) !== f.phase) return false;
+    if (f.owner && r.id_name !== f.owner) return false;
+    if (f.status && ddCourseStatus(r).label !== f.status) return false;
+    var pct = courseWeightedPct(r);
+    if (f.minPct && pct < f.minPct) return false;
+    if (f.dueWindow) {
+      var s9 = r.stages[8];
+      var planned = s9 && s9.planned;
+      if (!planned) return false;
+      var d = Math.round((planned - today) / 86400000);
+      if (f.dueWindow === 'past'      && d >= 0)             return false;
+      if (f.dueWindow === 'thisWeek'  && (d < 0 || d > 7))   return false;
+      if (f.dueWindow === 'thisMonth' && (d < 0 || d > 31))  return false;
+      if (f.dueWindow === 'nextMonth' && (d < 32 || d > 62)) return false;
+    }
+    return true;
+  });
+}
+
+function ddSquareClass(r, i) {
+  var s = r.stages[i];
+  if (!s) return 'yts';
+  if (s.sCls === 'done') return 'done';
+  if (s.sCls === 'wip') return 'wip';
+  if (s.sCls === 'review') return 'review';
+  if (s.late) return 'late';
+  // Ready to pick up: previous stage done, this one YTS/blank
+  if (i > 0 && r.stages[i-1] && r.stages[i-1].sCls === 'done' && (s.sCls === 'yts' || s.sCls === 'unknown')) return 'ready';
+  return 'yts';
+}
+
+function renderDrilldown() {
+  var host = $('tab-drilldown'); host.innerHTML = '';
+  var slice = applyFilteredSlice();
+
+  host.appendChild(hero(
+    'Drill-down',
+    'Course-by-course detail',
+    'detail',
+    'Pick any course to inspect its 9-stage workflow, owner, dates, and per-stage activities. Filters narrow the picker; click course names in the Delivery Status schedule list to jump straight here.',
+    []
+  ));
+
+  // ---------- Filter bar ----------
+  var f = DD_STATE.filters;
+  var courses = slice;
+  var phases = uniq(slice.map(ddPhaseLabel)).sort();
+  var owners = uniq(compact(slice.map(function(r){return r.id_name;}))).sort();
+  var statuses = ['COMPLETE','IN PROGRESS','IN REVIEW','LATE','YET TO START','UNKNOWN'];
+
+  function makeSelect(label, key, options, includeAllText) {
+    var sel = el('select', null,
+      el('option', { value: '' }, includeAllText || ('All ' + label.toLowerCase() + 's')),
+      options.map(function(o){
+        var attrs = { value: o };
+        if (f[key] === o) attrs.selected = 'selected';
+        return el('option', attrs, o);
+      })
+    );
+    sel.addEventListener('change', function(){ f[key] = sel.value; renderDrilldown(); });
+    return el('label', null, label, sel);
+  }
+
+  var search = el('input', { type: 'search', placeholder: 'Course name or ID…', value: f.q });
+  search.addEventListener('input', function(){
+    f.q = search.value;
+    renderDrilldown();
+    setTimeout(function(){ var s = document.querySelector('.dd-filter-bar input[type=search]'); if (s){ s.focus(); s.setSelectionRange(s.value.length, s.value.length); } }, 0);
+  });
+
+  var dueSelect = el('select', null,
+    el('option', { value: '', selected: f.dueWindow === '' ? 'selected' : null }, 'Any'),
+    el('option', { value: 'past',      selected: f.dueWindow === 'past'      ? 'selected' : null }, 'Past due'),
+    el('option', { value: 'thisWeek',  selected: f.dueWindow === 'thisWeek'  ? 'selected' : null }, 'Next 7 days'),
+    el('option', { value: 'thisMonth', selected: f.dueWindow === 'thisMonth' ? 'selected' : null }, 'This month'),
+    el('option', { value: 'nextMonth', selected: f.dueWindow === 'nextMonth' ? 'selected' : null }, 'Next month')
+  );
+  dueSelect.addEventListener('change', function(){ f.dueWindow = dueSelect.value; renderDrilldown(); });
+
+  var pctRange = el('input', { type: 'range', min: '0', max: '100', step: '5', value: String(f.minPct) });
+  pctRange.addEventListener('input', function(){
+    f.minPct = parseInt(pctRange.value, 10);
+    var d = document.getElementById('dd-min-pct-display');
+    if (d) d.textContent = 'Min % progress: ' + f.minPct + '%';
+  });
+  pctRange.addEventListener('change', function(){ renderDrilldown(); });
+
+  var resetBtn = el('button', { class: 'dd-reset', type: 'button' }, 'Reset filters');
+  resetBtn.addEventListener('click', function(){
+    DD_STATE.filters = { q:'', phase:'', owner:'', status:'', dueWindow:'', minPct:0 };
+    renderDrilldown();
+  });
+
+  var filterBar = el('div', { class: 'dd-filter-bar' },
+    el('label', null, 'Search', search),
+    makeSelect('Phase',  'phase',  phases,   'All phases'),
+    makeSelect('Owner (ID)', 'owner',  owners,   'All owners'),
+    makeSelect('Course Status', 'status', statuses, 'All statuses'),
+    el('label', null, 'Final Delivery Due', dueSelect),
+    el('label', null,
+      el('span', { id: 'dd-min-pct-display', class: 'dd-progress-display' }, 'Min % progress: ' + f.minPct + '%'),
+      pctRange
+    ),
+    resetBtn
+  );
+  host.appendChild(filterBar);
+
+  // ---------- Filtered course list + picker bar ----------
+  var filtered = ddFilterCourses(slice);
+  if (!filtered.length) {
+    host.appendChild(el('div', { class: 'card', style: 'text-align:center;color:var(--ink-3);padding:32px' },
+      'No courses match the current drill-down filters. Click ', el('b', null, 'Reset filters'), ' to start over.'));
+    return;
+  }
+  if (!DD_STATE.selectedSrNo || !filtered.some(function(r){ return r.sr_no === DD_STATE.selectedSrNo; })) {
+    DD_STATE.selectedSrNo = filtered[0].sr_no;
+  }
+  var idx = 0;
+  for (var k = 0; k < filtered.length; k++) {
+    if (filtered[k].sr_no === DD_STATE.selectedSrNo) { idx = k; break; }
+  }
+  var current = filtered[idx];
+
+  var picker = el('select', { class: 'dd-course-pick' });
+  filtered.forEach(function(r){
+    var attrs = { value: String(r.sr_no) };
+    if (r.sr_no === current.sr_no) attrs.selected = 'selected';
+    picker.appendChild(el('option', attrs, (r.course_code || ('#'+r.sr_no)) + ' — ' + (r.course_name || '')));
+  });
+  picker.addEventListener('change', function(){ DD_STATE.selectedSrNo = Number(picker.value); renderDrilldown(); });
+
+  var prevBtn = el('button', { class: 'dd-nav-btn', type: 'button' }, '◀ Prev');
+  var nextBtn = el('button', { class: 'dd-nav-btn', type: 'button' }, 'Next ▶');
+  if (idx === 0) prevBtn.disabled = true;
+  if (idx === filtered.length - 1) nextBtn.disabled = true;
+  prevBtn.addEventListener('click', function(){
+    if (idx > 0) { DD_STATE.selectedSrNo = filtered[idx-1].sr_no; renderDrilldown(); }
+  });
+  nextBtn.addEventListener('click', function(){
+    if (idx < filtered.length - 1) { DD_STATE.selectedSrNo = filtered[idx+1].sr_no; renderDrilldown(); }
+  });
+
+  host.appendChild(el('div', { class: 'dd-select-bar' },
+    el('span', { class: 'dd-pill' }, 'DRILL-DOWN · ' + (idx + 1) + ' OF ' + filtered.length + ' IN FILTER'),
+    picker, prevBtn, nextBtn
+  ));
+
+  // ---------- Course detail card ----------
+  var r = current;
+  var status = ddCourseStatus(r);
+  var phase = ddPhaseLabel(r);
+  var doneCount = r.stages.filter(function(s){return s.sCls === 'done';}).length;
+  var openCount = 9 - doneCount;
+  var pct = courseWeightedPct(r);
+  var stage8 = r.stages[7]; // QA Sign-off
+  var stage9 = r.stages[8]; // Final Approval
+
+  var card = el('div', { class: 'dd-course-card' });
+  card.appendChild(el('div', { class: 'dd-course-title' }, (r.course_code || ('Course #'+r.sr_no)) + ' — ' + (r.course_name || '')));
+  card.appendChild(el('div', { class: 'dd-course-sub' },
+    el('b', null, 'Owner (ID): '), (r.id_name || '—'),
+    ' · ',
+    el('b', null, 'Faculty: '), (r.faculty || '—'),
+    ' · ',
+    el('b', null, 'College: '), (r.college || '—'),
+    ' · ',
+    el('b', null, 'Term: '), (r.term || '—'),
+    ' · ',
+    el('b', null, 'Phase: '), el('span', { class: 'dd-phase-chip' }, phase),
+    ' · ',
+    el('b', null, 'Status: '), el('span', { class: 'chip ' + status.cls, style: 'margin-left:2px' }, status.label)
+  ));
+
+  function stat(label, value, sub, kind) {
+    return el('div', { class: 'dd-stat' + (kind ? ' s-' + kind : '') },
+      el('div', { class: 'dd-stat-label' }, label),
+      el('div', { class: 'dd-stat-value' }, value),
+      sub ? el('div', { class: 'dd-stat-sub' }, sub) : null
+    );
+  }
+  var s9Kind = stage9 && stage9.sCls === 'done' ? 'done' : (stage9 && stage9.late ? 'late' : 'pending');
+  var s8Kind = stage8 && stage8.sCls === 'done' ? 'done' : (stage8 && stage8.late ? 'late' : 'pending');
+  card.appendChild(el('div', { class: 'dd-stat-grid' },
+    stat('Tasks',            '9 stages',                 doneCount + ' done · ' + openCount + ' open'),
+    stat('Progress',         pct + '%',                   'Weighted across stages 1–9'),
+    stat('Phase',             phase,                       'Active stage'),
+    stat('Final Delivery',    stage9 ? statusLabel(stage9.status || '—') : '—',
+                              'Due ' + (stage9 && stage9.planned ? shortDate(stage9.planned) : '—'), s9Kind),
+    stat('QA Sign-off',       stage8 ? statusLabel(stage8.status || '—') : '—',
+                              'Due ' + (stage8 && stage8.planned ? shortDate(stage8.planned) : '—'), s8Kind)
+  ));
+  host.appendChild(card);
+
+  // ---------- Workflow status squares ----------
+  var wfCard = el('div', { class: 'dd-workflow-card' });
+  wfCard.appendChild(el('h3', null, 'Workflow status'));
+  wfCard.appendChild(el('div', { class: 'dd-wf-desc' },
+    'One square per workflow stage. Red ring = stage 8 (QA Sign-off / Alpha). Green ring = stage 9 (Final OU Faculty + OUES Approval).'));
+  var sq = el('div', { class: 'dd-wf-squares' });
+  for (var i = 0; i < 9; i++) {
+    var cls = 'dd-wf-square ' + ddSquareClass(r, i);
+    if (i === 7) cls += ' ring-qa';
+    if (i === 8) cls += ' ring-final';
+    var s = r.stages[i];
+    var titleParts = [
+      (i+1) + '. ' + WORKFLOW_DEFS[i].name,
+      'Status: ' + (s && s.status || '—'),
+      'Planned: ' + (s && s.planned ? shortDate(s.planned) : '—'),
+      'Actual: '  + (s && s.actual  ? shortDate(s.actual)  : '—')
+    ];
+    if (s && s.slip != null) titleParts.push('Slip: ' + (s.slip > 0 ? '+' : '') + s.slip + 'd');
+    sq.appendChild(el('div', { class: cls, title: titleParts.join('\n') }, String(i+1)));
+  }
+  wfCard.appendChild(sq);
+  wfCard.appendChild(el('div', { class: 'dd-wf-legend' },
+    el('span', { class: 'item' }, el('span', { class: 'sq done' }),     'Done'),
+    el('span', { class: 'item' }, el('span', { class: 'sq wip' }),      'In progress'),
+    el('span', { class: 'item' }, el('span', { class: 'sq late' }),     'Late'),
+    el('span', { class: 'item' }, el('span', { class: 'sq ready' }),    'Ready to pick up'),
+    el('span', { class: 'item' }, el('span', { class: 'sq yts' }),      'Yet to start'),
+    el('span', { class: 'item' }, el('span', { class: 'sq ring-qa' }),  'QA Sign-off (#8)'),
+    el('span', { class: 'item' }, el('span', { class: 'sq ring-final' }), 'Final Approval (#9)')
+  ));
+  host.appendChild(wfCard);
+
+  // ---------- Activities table ----------
+  var actCard = el('div', { class: 'dd-activities-card' });
+  actCard.appendChild(el('h3', null, 'Activities'));
+  actCard.appendChild(el('div', { class: 'dd-act-sub' }, '9 workflow stages with planned/actual dates, status, and owner.'));
+  var aWrap = el('div', { class: 'dd-act-table-wrap' });
+  var aTbl = el('table', { class: 'dd-act-table' });
+  aTbl.appendChild(el('thead', null, el('tr', null,
+    el('th', null, '#'),
+    el('th', null, 'Stage'),
+    el('th', null, 'Owner'),
+    el('th', null, 'Status'),
+    el('th', null, 'Planned'),
+    el('th', null, 'Actual'),
+    el('th', null, 'Slip'),
+    el('th', null, 'Weight')
+  )));
+  var aTb = el('tbody');
+  r.stages.forEach(function(s, i){
+    var owner;
+    if (i === 0) owner = 'OUES Team';
+    else if (i === 2 || i === 3 || i === 4 || i === 8) owner = (r.faculty || 'Faculty') + ' + ' + (r.id_name || 'ID');
+    else if (i === 7) owner = 'QA Team';
+    else owner = (r.id_name || 'ID') + (i === 6 ? ' + ' + (r.faculty || 'Faculty') : '');
+    var slipCell;
+    if (s.slip == null) slipCell = el('span', { style: 'color:var(--ink-3)' }, '—');
+    else if (s.slip === 0) slipCell = el('span', { style: 'color:var(--good);font-weight:600' }, 'on time');
+    else if (s.slip < 0)   slipCell = el('span', { style: 'color:var(--good);font-weight:600' }, String(s.slip) + 'd');
+    else                   slipCell = el('span', { style: 'color:var(--risk);font-weight:600' }, '+' + s.slip + 'd');
+    aTb.appendChild(el('tr', null,
+      el('td', null, String(i + 1)),
+      el('td', null,
+        el('div', { style: 'font-weight:600' }, WORKFLOW_DEFS[i].name),
+        el('div', { style: 'font-size:11px;color:var(--ink-3)' }, WORKFLOW_DEFS[i].short)
+      ),
+      el('td', null, owner),
+      el('td', null, el('span', { class: 'chip ' + (s.sCls||'unknown') }, statusLabel(s.status))),
+      el('td', null, s.planned ? shortDate(s.planned) : '—'),
+      el('td', null, s.actual  ? shortDate(s.actual)  : '—'),
+      el('td', null, slipCell),
+      el('td', null, STAGE_WEIGHTS[i] + '%')
+    ));
+  });
+  aTbl.appendChild(aTb);
+  aWrap.appendChild(aTbl);
+  actCard.appendChild(aWrap);
+  host.appendChild(actCard);
+}
+
+
+/* ============================================================
+ * DELIVERY-MODE VIEWS (built off stage 9: OU Faculty + OUES ID
+ * Approval on Course, using planned/actual/status)
+ * ============================================================
+ */
+var COLLEGE_COLORS = {
+  'Arts and Sciences': '#2E78A1',
+  'Business':          '#841617',
+  'Engineering':       '#4F6B43',
+  'Nursing':           '#B85C00',
+  'PACS':              '#6E5C40'
+};
+var COLLEGE_ABBREV = {
+  'Arts and Sciences': 'A&S',
+  'Business':          'Bus',
+  'Engineering':       'Eng',
+  'Nursing':           'Nur',
+  'PACS':              'PACS'
+};
+function collegeColor(name){ return COLLEGE_COLORS[name] || '#6E5C40'; }
+function collegeAbbrev(name){ return COLLEGE_ABBREV[name] || (String(name||'').slice(0,4)); }
+
+function buildDeliveryData(slice){
+  var today = new Date(); today.setHours(0,0,0,0);
+  var data = { monthBuckets: [], calendarDays: {}, listRows: [], today: today };
+
+  for (var m = 0; m < 4; m++){
+    var d = new Date(today.getFullYear(), today.getMonth() + m, 1);
+    data.monthBuckets.push({
+      year: d.getFullYear(), monthIdx: d.getMonth(),
+      label: d.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }).toUpperCase(),
+      total: 0, delivered: 0, forecast: 0, byCollege: {}
+    });
+  }
+
+  function dayBucket(key){
+    if (!data.calendarDays[key]) data.calendarDays[key] = {
+      total: 0, delivered: 0, deliveredOnBaseline: [], slippedIn: [], movedAway: [], byCollege: {}, isPlanned: false
+    };
+    return data.calendarDays[key];
+  }
+
+  slice.forEach(function(r){
+    var s9 = r.stages && r.stages[8];
+    if (!s9) return;
+    var planned = s9.planned;
+    var actual  = s9.actual;
+    var isDone  = s9.sCls === 'done';
+    if (!planned && !actual) return;
+    var effDate = isDone && actual ? actual : (planned || actual);
+    if (!effDate) return;
+    var shiftDays = (planned && actual) ? Math.round((actual - planned) / 86400000) : null;
+    var hasShift  = (planned && actual && shiftDays !== 0);
+    var college   = r.college || 'Unknown';
+
+    // List row
+    data.listRows.push({
+      r: r,
+      course_code: r.course_code, course_name: r.course_name,
+      college: college, subject: r.subject, term: r.term, course_type: r.course_type,
+      id_name: r.id_name,
+      planned: planned, actual: actual, status: s9.status, sCls: s9.sCls,
+      slip: shiftDays, isDone: isDone, hasShift: hasShift, effDate: effDate
+    });
+
+    // Month buckets
+    data.monthBuckets.forEach(function(mb){
+      if (effDate.getFullYear() === mb.year && effDate.getMonth() === mb.monthIdx){
+        mb.total++;
+        if (isDone) mb.delivered++; else mb.forecast++;
+        if (!mb.byCollege[college]) mb.byCollege[college] = { count: 0, delivered: 0 };
+        mb.byCollege[college].count++;
+        if (isDone) mb.byCollege[college].delivered++;
+      }
+    });
+
+    // Calendar entries
+    var effKey = isoDate(effDate);
+    var effBucket = dayBucket(effKey);
+    effBucket.total++;
+    if (isDone) effBucket.delivered++;
+    effBucket.byCollege[college] = (effBucket.byCollege[college] || 0) + 1;
+
+    if (hasShift){
+      effBucket.slippedIn.push({ r: r, planned: planned, actual: actual, sCls: s9.sCls, status: s9.status });
+      var plannedKey = isoDate(planned);
+      var pb = dayBucket(plannedKey);
+      pb.movedAway.push({ r: r, planned: planned, actual: actual, sCls: s9.sCls, status: s9.status });
+    } else {
+      effBucket.deliveredOnBaseline.push({ r: r, planned: planned, actual: actual, sCls: s9.sCls, status: s9.status });
+    }
+  });
+
+  return data;
+}
+
+function renderDeliveryForecastCards(data){
+  var row = el('div', { class: 'df-row' });
+  data.monthBuckets.forEach(function(mb){
+    var card = el('div', { class: 'df-card' });
+    card.appendChild(el('div', { class: 'df-eyebrow' }, mb.label));
+    card.appendChild(el('div', { class: 'df-num' + (mb.total ? '' : ' crimson') }, String(mb.total)));
+    card.appendChild(el('div', { class: 'df-sub' }, 'deliveries this month'));
+
+    var colleges = Object.keys(mb.byCollege);
+    colleges.sort(function(a,b){ return mb.byCollege[b].count - mb.byCollege[a].count; });
+    var maxN = colleges.length ? mb.byCollege[colleges[0]].count : 0;
+    if (colleges.length){
+      var bars = el('div', { class: 'df-bars' });
+      colleges.slice(0, 5).forEach(function(c){
+        var info = mb.byCollege[c];
+        var pct = maxN ? (info.count / maxN * 100) : 0;
+        bars.appendChild(el('div', { class: 'df-bar-row', title: c + ': ' + info.count + ' courses · ' + info.delivered + ' delivered' },
+          el('span', { class: 'df-bl' }, collegeAbbrev(c)),
+          el('div', { class: 'df-bar-track' },
+            el('div', { class: 'df-bar-fill', style: 'width:' + pct.toFixed(0) + '%;background:' + collegeColor(c) })
+          ),
+          el('span', { class: 'df-bar-val' }, info.count + ' · ' + info.delivered + ' done')
+        ));
+      });
+      card.appendChild(bars);
+    }
+
+    var pctC = mb.total ? Math.round(100 * mb.delivered / mb.total) : 0;
+    card.appendChild(el('div', { class: 'df-foot' },
+      el('span', null, mb.delivered + ' delivered · ' + pctC + '% complete'),
+      el('span', { class: 'df-forecast' }, mb.forecast + ' forecast')
+    ));
+    row.appendChild(card);
+  });
+  return row;
+}
+
+function renderDeliveryCalendar(data){
+  var wrap = el('div', { class: 'card cal-wrap' });
+  // Calendar header — detailed view only (toggle removed)
+  var calView = 'detailed';
+  wrap.appendChild(el('div', { class: 'cal-head' },
+    el('span', { class: 'cal-eyebrow' }, 'Delivery calendar — stage 9 forecast vs actual')
+  ));
+  wrap.appendChild(el('div', { class: 'cal-desc' },
+    'Each cell shows the number of stage-9 deliveries on that day based on the current forecast. ' +
+    'A green border means all courses on that day are delivered. ' +
+    'An orange border means at least one course shifted FROM or TO that day vs the baseline plan. ' +
+    'The corner badge shows the net difference (+ gained from baseline, – lost to other days).'));
+
+  // Legend
+  var legend = el('div', { class: 'cal-legend' });
+  ['Arts and Sciences','Business','Engineering','Nursing','PACS'].forEach(function(c, i){
+    legend.appendChild(el('span', { class: 'leg' },
+      el('span', { class: 'sw', style: 'background:' + collegeColor(c) }),
+      collegeAbbrev(c) + ' · ' + c
+    ));
+  });
+  legend.appendChild(el('span', { class: 'leg' }, el('span', { class: 'sw dot-delivered' }), 'All delivered'));
+  legend.appendChild(el('span', { class: 'leg' }, el('span', { class: 'sw dot-shifted' }), 'Shifted'));
+  legend.appendChild(el('span', { class: 'leg' }, el('span', { class: 'sw dot-today' }), 'Today'));
+  wrap.appendChild(legend);
+
+  // 4 monthly grids
+  var grids = el('div', { class: 'cal-grids' });
+  for (var m = 0; m < 4; m++){
+    var d = new Date(data.today.getFullYear(), data.today.getMonth() + m, 1);
+    grids.appendChild(renderMonthGrid(d, data, calView));
+  }
+  wrap.appendChild(grids);
+  return wrap;
+}
+
+function renderMonthGrid(monthDate, data, calView){
+  var grid = el('div', { class: 'cal-grid' });
+  grid.appendChild(el('div', { class: 'cal-month-name' }, monthDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })));
+
+  var dowRow = el('div', { class: 'cal-row cal-dow-row' });
+  ['S','M','T','W','T','F','S'].forEach(function(d){ dowRow.appendChild(el('div', { class: 'cal-dow' }, d)); });
+  grid.appendChild(dowRow);
+
+  var firstDay = new Date(monthDate.getFullYear(), monthDate.getMonth(), 1);
+  var lastDay  = new Date(monthDate.getFullYear(), monthDate.getMonth() + 1, 0);
+  var firstDow = firstDay.getDay();
+  var daysInMonth = lastDay.getDate();
+
+  var row = el('div', { class: 'cal-row' });
+  for (var i = 0; i < firstDow; i++) row.appendChild(el('div', { class: 'cal-cell cal-empty' }));
+
+  for (var day = 1; day <= daysInMonth; day++){
+    (function(dayNum){
+      var date = new Date(monthDate.getFullYear(), monthDate.getMonth(), dayNum);
+      var key  = isoDate(date);
+      var bucket = data.calendarDays[key];
+
+      var cls = 'cal-cell';
+      if (calView === 'cleaner') cls += ' cleaner';
+      if (date.getTime() === data.today.getTime()) cls += ' today';
+      if (bucket && bucket.total > 0){
+        cls += ' has-deliveries';
+        if (bucket.delivered === bucket.total && bucket.total > 0) cls += ' all-delivered';
+        if (bucket.slippedIn.length || bucket.movedAway.length) cls += ' shifted';
+      }
+      var cell = el('div', { class: cls });
+      cell.appendChild(el('div', { class: 'cal-day-num' }, String(dayNum)));
+
+      if (bucket && bucket.total > 0){
+        cell.appendChild(el('div', { class: 'cal-day-count' }, String(bucket.total)));
+        var net = bucket.slippedIn.length - bucket.movedAway.length;
+        if (net !== 0){
+          cell.appendChild(el('div', { class: 'cal-shift-badge' + (net < 0 ? ' neg' : '') },
+            (net > 0 ? '+' : '') + net));
+        }
+        cell.addEventListener('click', function(){ showDayDetailModal(date, bucket); });
+      }
+      row.appendChild(cell);
+
+      if (date.getDay() === 6){
+        grid.appendChild(row);
+        row = el('div', { class: 'cal-row' });
+      }
+    })(day);
+  }
+  if (row.children.length > 0){
+    while (row.children.length < 7) row.appendChild(el('div', { class: 'cal-cell cal-empty' }));
+    grid.appendChild(row);
+  }
+  return grid;
+}
+
+function showDayDetailModal(date, bucket){
+  var existing = document.getElementById('day-detail-modal');
+  if (existing) existing.remove();
+  var modal = el('div', { id: 'day-detail-modal', class: 'modal-overlay' });
+  modal.addEventListener('click', function(e){ if (e.target === modal) modal.remove(); });
+
+  var card = el('div', { class: 'modal-card' });
+  card.appendChild(el('div', { class: 'modal-head' },
+    el('h3', null, 'Deliveries on ' + date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })),
+    (function(){
+      var btn = el('button', { class: 'modal-close', type: 'button', 'aria-label': 'Close' }, '×');
+      btn.addEventListener('click', function(){ modal.remove(); });
+      return btn;
+    })()
+  ));
+
+  function courseRow(entry, shiftLabel){
+    var r = entry.r;
+    return el('div', { class: 'modal-course-row' },
+      el('div', null,
+        el('span', { class: 'pill-tag', style: 'background:' + (collegeColor(r.college) + '22') + ';color:' + collegeColor(r.college) }, collegeAbbrev(r.college)),
+        ' ',
+        el('span', { class: 'mc-name' }, r.course_code + ' — ' + r.course_name)
+      ),
+      el('div', { class: 'mc-meta' }, [r.college, r.term, r.course_type].filter(Boolean).join(' · ')),
+      shiftLabel ? el('div', { class: 'mc-shift' }, shiftLabel,
+        entry.sCls === 'done' ? el('span', { class: 'chip done', style: 'margin-left:8px' }, 'Delivered') : el('span', { class: 'chip ' + entry.sCls, style: 'margin-left:8px' }, statusLabel(entry.status))
+      ) : null
+    );
+  }
+  function section(title, kind, list, emptyMsg, makeLabel){
+    var s = el('div', { class: 'modal-section' });
+    s.appendChild(el('div', { class: 'modal-section-head ' + kind },
+      el('span', null, title),
+      el('span', { class: 'ms-count' }, list.length + ' COURSES')
+    ));
+    if (list.length === 0){
+      s.appendChild(el('div', { class: 'modal-section-empty' }, emptyMsg));
+    } else {
+      list.forEach(function(entry){ s.appendChild(courseRow(entry, makeLabel ? makeLabel(entry) : null)); });
+    }
+    return s;
+  }
+
+  card.appendChild(section('DELIVERING ON BASELINE', 'baseline', bucket.deliveredOnBaseline,
+    'None — no courses are delivering exactly on their original baseline date.',
+    function(e){ return e.actual ? ('Baseline ' + shortDate(e.planned) + ' · delivered on baseline') : ('Forecast for ' + shortDate(e.planned)); }
+  ));
+  card.appendChild(section('SLIPPED IN (MOVED TO THIS DATE)', 'slipped', bucket.slippedIn,
+    'None — no courses slipped into this date.',
+    function(e){ var dir = e.actual < e.planned ? 'earlier' : 'later';
+      return 'Baseline ' + shortDate(e.planned) + ' → moved ' + dir + ' to ' + shortDate(e.actual); }
+  ));
+  card.appendChild(section('MOVED AWAY FROM THIS DATE', 'moved', bucket.movedAway,
+    'None — all courses with this baseline date are still on it.',
+    function(e){ var dir = e.actual < e.planned ? 'earlier on ' : 'later on ';
+      return 'Baseline ' + shortDate(e.planned) + ' → delivered ' + dir + shortDate(e.actual); }
+  ));
+
+  modal.appendChild(card);
+  document.body.appendChild(modal);
+}
+
+function renderDeliverySchedule(data){
+  var card = el('div', { class: 'ds-card' });
+  card.appendChild(el('div', { class: 'ds-eyebrow' }, 'Delivery schedule · Expandable list'));
+  card.appendChild(el('div', { class: 'ds-desc' }, 'All courses with their stage-9 Planned, Actual, Status and slip days. Group by Date, College, or Subject. Search by code/name/owner; export to Excel or CSV.'));
+
+  var DS_GROUP  = window._DS_GROUP  || 'date';
+  var DS_SEARCH = window._DS_SEARCH || '';
+
+  var grp = el('div', { class: 'subtab-wrap' },
+    el('button', { type: 'button', 'aria-selected': String(DS_GROUP === 'date'),    'data-grp': 'date' },    'By Delivery Date'),
+    el('button', { type: 'button', 'aria-selected': String(DS_GROUP === 'college'), 'data-grp': 'college' }, 'By College'),
+    el('button', { type: 'button', 'aria-selected': String(DS_GROUP === 'subject'), 'data-grp': 'subject' }, 'By Subject')
+  );
+  Array.prototype.forEach.call(grp.querySelectorAll('button'), function(b){
+    b.addEventListener('click', function(){ window._DS_GROUP = b.dataset.grp; renderNarrative(); });
+  });
+
+  var search = el('input', { type: 'search', class: 'ds-search', placeholder: 'Search courses…', value: DS_SEARCH });
+  search.addEventListener('input', function(){
+    window._DS_SEARCH = search.value; renderNarrative();
+    // Restore focus & caret since renderNarrative re-builds the DOM
+    setTimeout(function(){
+      var s = document.querySelector('.ds-search');
+      if (s){ s.focus(); s.setSelectionRange(s.value.length, s.value.length); }
+    }, 0);
+  });
+
+  var rows = data.listRows.filter(function(r){
+    if (!DS_SEARCH) return true;
+    var q = DS_SEARCH.toLowerCase();
+    return ((r.course_code||'') + ' ' + (r.course_name||'') + ' ' + (r.college||'') + ' ' + (r.subject||'') + ' ' + (r.term||'') + ' ' + (r.id_name||'')).toLowerCase().indexOf(q) >= 0;
+  });
+
+  var ctrls = el('div', { class: 'ds-controls' }, grp, search,
+    el('div', { class: 'ds-export' },
+      el('button', { class: 'btn', type: 'button', onclick: function(){ exportScheduleXlsx(rows); } }, '⤓ Copy to Excel'),
+      el('button', { class: 'btn', type: 'button', onclick: function(){ exportScheduleCsv(rows); } }, 'CSV')
+    )
+  );
+  card.appendChild(ctrls);
+
+  // Group + table
+  var groups = {};
+  rows.forEach(function(r){
+    var key;
+    if (DS_GROUP === 'date')    key = r.effDate ? isoDate(r.effDate) : 'No date';
+    else if (DS_GROUP === 'college') key = r.college || 'Unknown';
+    else                         key = r.subject || 'Unknown';
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(r);
+  });
+  var keys = Object.keys(groups).sort();
+
+  var wrap = el('div', { class: 'ds-table-wrap' });
+  var tbl  = el('table', { class: 'ds-table' });
+  tbl.appendChild(el('thead', null, el('tr', null,
+    el('th', null, '#'),
+    el('th', null, 'Subject'),
+    el('th', null, 'College'),
+    el('th', null, 'Term'),
+    el('th', null, 'Course'),
+    el('th', null, 'Planned'),
+    el('th', null, 'Actual'),
+    el('th', null, 'Status'),
+    el('th', null, 'Slip (D)')
+  )));
+  var tb = el('tbody');
+  var rowNum = 0;
+  keys.forEach(function(key){
+    var bucketRows = groups[key];
+    var groupLabel = key;
+    if (DS_GROUP === 'date' && key !== 'No date'){
+      try { groupLabel = new Date(key + 'T00:00:00').toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }); } catch(e){}
+    }
+    tb.appendChild(el('tr', { class: 'ds-group-row' },
+      el('td', { colspan: '9' }, groupLabel + ' · ' + bucketRows.length + ' courses')
+    ));
+    bucketRows.forEach(function(r){
+      rowNum++;
+      var slipCell;
+      if (!r.actual)            slipCell = el('span', { class: 'ds-slip-pending' }, '—');
+      else if (r.slip === 0)    slipCell = el('span', { class: 'ds-slip-onTime' }, 'on time');
+      else if (r.slip < 0)      slipCell = el('span', { class: 'ds-slip-early' }, String(r.slip));
+      else                      slipCell = el('span', { class: 'ds-slip-late' }, '+' + r.slip);
+      var statusCls = r.sCls || 'unknown';
+      var rowSrNo = r.r ? r.r.sr_no : null;
+      var courseCell = el('td', { class: 'ds-clickable-code', title: 'Open this course in the Drill-down tab' },
+        el('div', { class: 'ds-code', style: 'font-weight:600;color:var(--ou-crimson)' }, r.course_code || ''),
+        el('div', { style: 'font-size:11px;color:var(--ink-3)' }, r.course_name || '')
+      );
+      if (rowSrNo != null) {
+        courseCell.addEventListener('click', function(){ navigateToDrilldown(rowSrNo); });
+      }
+      tb.appendChild(el('tr', null,
+        el('td', null, String(rowNum)),
+        el('td', null, el('span', { class: 'ds-subj' }, r.subject || '')),
+        el('td', null, r.college || ''),
+        el('td', null, r.term || ''),
+        courseCell,
+        el('td', null, r.planned ? shortDate(r.planned) : '—'),
+        el('td', null, r.actual  ? shortDate(r.actual)  : '—'),
+        el('td', null, el('span', { class: 'chip ' + statusCls }, statusLabel(r.status))),
+        el('td', null, slipCell)
+      ));
+    });
+  });
+  tbl.appendChild(tb);
+  wrap.appendChild(tbl);
+  card.appendChild(wrap);
+  return card;
+}
+
+function _scheduleExportRows(rows){
+  var hdrs = ['#','Subject','College','Term','Course Code','Course Name','Planned','Actual','Status','Slip (days)'];
+  var out  = [hdrs];
+  rows.forEach(function(r, i){
+    out.push([
+      i + 1, r.subject || '', r.college || '', r.term || '',
+      r.course_code || '', r.course_name || '',
+      r.planned ? isoDate(r.planned) : '',
+      r.actual  ? isoDate(r.actual)  : '',
+      r.status || '',
+      r.slip == null ? '' : r.slip
+    ]);
+  });
+  return out;
+}
+function exportScheduleXlsx(rows){
+  var aoa = _scheduleExportRows(rows);
+  // Copy as TSV to clipboard for Excel paste, AND offer a .xlsx download.
+  var tsv = aoa.map(function(r){ return r.join('\t'); }).join('\n');
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(tsv).catch(function(){});
+  }
+  exportToExcel(aoa.slice(1), aoa[0], 'Delivery Schedule', 'OUE06_delivery_schedule');
+}
+function exportScheduleCsv(rows){
+  var aoa = _scheduleExportRows(rows);
+  var csv = aoa.map(function(r){
+    return r.map(function(c){
+      var s = c == null ? '' : String(c);
+      if (s.indexOf(',') >= 0 || s.indexOf('"') >= 0 || s.indexOf('\n') >= 0){
+        s = '"' + s.replace(/"/g, '""') + '"';
+      }
+      return s;
+    }).join(',');
+  }).join('\n');
+  var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'OUE06_delivery_schedule_' + isoDate(new Date()) + '.csv';
+  document.body.appendChild(a); a.click(); a.remove();
+}
+
 
 /* ===== TAB 1: NARRATIVE ===== */
 function renderNarrative() {
@@ -1084,6 +2027,12 @@ function renderNarrative() {
     kpiCard('QA Sign-off complete',     String(qaDone),   'Stage 8 = Done', qaDone ? 'good' : null, qaTip),
     kpiCard('Final Approval complete',  String(finalDone),'Stage 9 = Done', finalDone ? 'good' : null, finalTip)
   ));
+
+  // ===== Delivery views (forecast cards, calendar, schedule list) =====
+  var __delivery = buildDeliveryData(slice);
+  host.appendChild(renderDeliveryForecastCards(__delivery));
+  host.appendChild(renderDeliveryCalendar(__delivery));
+  host.appendChild(renderDeliverySchedule(__delivery));
 
   var storyCard = el('div', { class: 'card' });
   storyCard.appendChild(el('div', { class: 'card-head' },
