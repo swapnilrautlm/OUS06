@@ -480,6 +480,106 @@ table.ct-tasks-table .slip-early{color:var(--good);font-weight:600}
 table.ct-tasks-table .slip-late{color:var(--risk);font-weight:600}
 table.ct-tasks-table .slip-pending{color:var(--ink-3)}
 
+
+/* Weekly Status tab */
+.ws-status-bar{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:12px 16px;margin-bottom:14px;box-shadow:var(--shadow-sm)}
+.ws-status-pill{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2);font-weight:500}
+.ws-status-dot{width:8px;height:8px;border-radius:50%;background:var(--good)}
+.ws-status-dot.loading{background:var(--warn);animation:pulse 1s ease-in-out infinite}
+.ws-status-dot.error{background:var(--risk)}
+.ws-status-bar .ws-mini-chip{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:999px;font-size:12px;font-weight:600;background:var(--ou-light-gray);color:var(--ink-2)}
+.ws-status-bar .ws-mini-chip .dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+.ws-status-bar .ws-mini-chip.green{background:#EBF1E6;color:var(--good)}
+.ws-status-bar .ws-mini-chip.green .dot{background:var(--good)}
+.ws-status-bar .ws-mini-chip.amber{background:#FFF1DE;color:var(--warn)}
+.ws-status-bar .ws-mini-chip.amber .dot{background:var(--warn)}
+.ws-status-bar .ws-mini-chip.red{background:#FBE4E5;color:var(--risk)}
+.ws-status-bar .ws-mini-chip.red .dot{background:var(--risk)}
+.ws-status-bar .ws-spacer{flex:1}
+.ws-status-bar .btn{font-size:12px}
+
+.ws-rag-bar{display:flex;height:24px;border-radius:6px;overflow:hidden;background:var(--ou-light-gray);margin-bottom:14px;border:1px solid var(--line)}
+.ws-rag-bar .seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;letter-spacing:0.04em;transition:opacity 200ms}
+.ws-rag-bar .seg:hover{opacity:0.85}
+.ws-rag-bar .seg.green{background:var(--good)}
+.ws-rag-bar .seg.amber{background:var(--warn)}
+.ws-rag-bar .seg.red{background:var(--risk)}
+.ws-rag-bar .seg.grey{background:var(--ink-3)}
+
+.ws-filter-bar{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow-sm);margin-bottom:14px;display:grid;grid-template-columns:repeat(5,1fr) auto;gap:12px;align-items:end}
+@media (max-width:1280px){.ws-filter-bar{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:640px){.ws-filter-bar{grid-template-columns:repeat(2,1fr)}}
+.ws-filter-bar label{display:flex;flex-direction:column;gap:3px;font-size:10px;color:var(--ink-3);font-weight:700;letter-spacing:0.06em;text-transform:uppercase}
+.ws-filter-bar input[type=search],.ws-filter-bar select{font:inherit;font-size:13px;padding:6px 8px;border:1px solid var(--line-2);border-radius:5px;background:var(--card);color:var(--ink);width:100%}
+.ws-filter-bar .ws-reset{font:inherit;cursor:pointer;padding:7px 14px;border:1px solid var(--line-2);background:var(--card);border-radius:6px;font-size:12px;color:var(--ink-2);font-weight:600;align-self:end}
+.ws-filter-bar .ws-reset:hover{background:var(--ou-light-gray)}
+
+.ws-risk-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:14px;overflow:hidden}
+.ws-risk-card .ws-risk-head{padding:14px 18px;background:linear-gradient(180deg,#FDF2F3 0%,#FBE6E8 100%);border-bottom:1px solid var(--line)}
+.ws-risk-card h3{font-size:16px;font-family:'Source Serif 4',serif;color:var(--ink);margin:0 0 4px 0}
+.ws-risk-card .ws-risk-sub{font-size:12px;color:var(--ink-3)}
+.ws-risk-list{padding:0}
+.ws-risk-row{display:grid;grid-template-columns:160px 1fr;gap:14px;padding:12px 18px;border-bottom:1px solid var(--line);font-size:12px}
+.ws-risk-row:last-child{border-bottom:0}
+.ws-risk-row.off-track{border-left:3px solid var(--risk)}
+.ws-risk-row.delayed{border-left:3px solid var(--warn)}
+.ws-risk-row .ws-risk-meta .ws-risk-code{font-weight:700;color:var(--ou-crimson);font-size:13px;cursor:pointer}
+.ws-risk-row .ws-risk-meta .ws-risk-code:hover{text-decoration:underline}
+.ws-risk-row .ws-risk-meta .ws-risk-name{color:var(--ink-2);font-size:11px;margin-top:2px}
+.ws-risk-row .ws-risk-meta .ws-risk-owner{color:var(--ink-3);font-size:11px;margin-top:6px}
+.ws-risk-row .ws-risk-detail .ws-risk-status-line{margin-bottom:6px}
+.ws-risk-row .ws-risk-detail .ws-risk-narr{font-size:12px;color:var(--ink-2);white-space:pre-wrap;line-height:1.5;background:#FFFEFB;border:1px dashed var(--line-2);padding:8px 10px;border-radius:5px;margin-bottom:6px}
+.ws-risk-row .ws-risk-detail .ws-risk-dep{font-size:11px;color:var(--risk);background:var(--risk-bg);padding:6px 9px;border-radius:5px;border-left:3px solid var(--risk);white-space:pre-wrap}
+.ws-risk-row .ws-risk-detail .ws-risk-dep::before{content:'⚠ ';font-weight:700}
+
+.ws-rag-pill{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:3px 9px;border-radius:999px}
+.ws-rag-pill.green{background:#EBF1E6;color:var(--good)}
+.ws-rag-pill.amber{background:#FFF1DE;color:var(--warn)}
+.ws-rag-pill.red{background:#FBE4E5;color:var(--risk)}
+.ws-rag-pill.grey{background:var(--ou-light-gray);color:var(--ink-3)}
+
+.ws-table-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow-sm);margin-bottom:14px}
+.ws-table-card .ws-table-controls{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.ws-table-card .ws-table-controls .ws-count{font-size:12px;color:var(--ink-3);font-weight:600}
+.ws-table-card .ws-table-controls .ws-export{margin-left:auto;display:flex;gap:6px}
+.ws-table-wrap{border:1px solid var(--line);border-radius:8px;overflow:hidden;max-height:600px;overflow-y:auto}
+table.ws-table{width:100%;border-collapse:collapse;font-size:12px}
+table.ws-table thead th{position:sticky;top:0;background:var(--ou-light-gray);color:var(--ink-2);padding:9px 10px;text-align:left;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border-bottom:1px solid var(--line-2);z-index:2;white-space:nowrap}
+table.ws-table tbody td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+table.ws-table tbody tr:hover td{background:#FCFBF9}
+table.ws-table .ws-code{font-weight:700;color:var(--ou-crimson);cursor:pointer;white-space:nowrap}
+table.ws-table .ws-code:hover{text-decoration:underline}
+table.ws-table .ws-name{color:var(--ink-2);font-size:11px;margin-top:2px}
+table.ws-table .ws-current-status{font-size:11px;color:var(--ink-2);max-width:240px}
+table.ws-table tr.ws-expanded td{background:#FFFEFB}
+table.ws-table tr.ws-expand-row td{padding:12px 16px;background:#FBF8F1;border-bottom:1px solid var(--line-2)}
+.ws-expand-row .ws-expand-block{display:block;width:100%;box-sizing:border-box}
+.ws-expand-row .ws-expand-block > div{display:block;width:100%;box-sizing:border-box;margin-bottom:14px}
+.ws-expand-row .ws-expand-block > div:last-child{margin-bottom:0}
+.ws-expand-row .ws-expand-narr,.ws-expand-row .ws-expand-dep{display:block;width:100%;box-sizing:border-box}
+table.ws-table thead th.ws-sortable{cursor:pointer;user-select:none;transition:background 120ms ease}
+table.ws-table thead th.ws-sortable:hover{background:#E6E6DE}
+table.ws-table thead th.ws-sortable.active{color:var(--ou-crimson);background:#F2EAEA}
+table.ws-table thead th.ws-sortable .ws-sort-arrow{margin-left:4px;font-size:9px;opacity:0.55}
+table.ws-table thead th.ws-sortable.active .ws-sort-arrow{opacity:1}
+.ws-rag-chip-row{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:10px;padding:8px 0;border-bottom:1px dashed var(--line)}
+.ws-rag-chip-row .ws-chip-label{font-size:11px;font-weight:700;color:var(--ink-3);letter-spacing:0.06em;text-transform:uppercase;margin-right:4px}
+.ws-rag-chip{font:inherit;font-size:11px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid var(--line-2);background:var(--card);color:var(--ink-2);cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all 120ms ease}
+.ws-rag-chip:hover{background:var(--ou-light-gray)}
+.ws-rag-chip .dot{width:7px;height:7px;border-radius:50%;background:var(--ink-3);display:inline-block}
+.ws-rag-chip.green .dot{background:var(--good)}
+.ws-rag-chip.amber .dot{background:var(--warn)}
+.ws-rag-chip.red .dot{background:var(--risk)}
+.ws-rag-chip.active{background:var(--ou-crimson);color:#fff;border-color:var(--ou-crimson)}
+.ws-rag-chip.active .dot{background:#fff}
+.ws-risk-row .ws-risk-meta .ws-risk-owner > div{margin-top:2px}
+.ws-expand-row .ws-expand-block h4{font-size:10px;font-weight:700;color:var(--ink-3);letter-spacing:0.08em;text-transform:uppercase;margin:0 0 5px 0}
+.ws-expand-row .ws-expand-narr{font-size:12px;color:var(--ink-2);white-space:pre-wrap;line-height:1.5;background:var(--card);border:1px solid var(--line);padding:8px 10px;border-radius:5px}
+.ws-expand-row .ws-expand-dep{font-size:12px;color:var(--risk);background:var(--risk-bg);padding:8px 10px;border-radius:5px;border-left:3px solid var(--risk);white-space:pre-wrap}
+.ws-expand-row .ws-expand-dep.empty{color:var(--ink-3);background:var(--card);border:1px dashed var(--line-2);border-left-color:var(--line-2);font-style:italic}
+.ws-expand-toggle{cursor:pointer;color:var(--ink-3);user-select:none;font-size:14px;line-height:1;display:inline-block;width:18px;text-align:center;transition:transform 150ms ease}
+.ws-expand-toggle.open{transform:rotate(90deg);color:var(--ou-crimson)}
+
 </style>
 </head>
 <body>
@@ -524,6 +624,7 @@ table.ct-tasks-table .slip-pending{color:var(--ink-3)}
 
 <nav class="topnav app" id="topnav">
   <button class="tab active" data-tab="narrative" type="button"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><line x1="7" y1="9" x2="17" y2="9"/><line x1="7" y1="13" x2="17" y2="13"/><line x1="7" y1="17" x2="13" y2="17"/></svg>Delivery Status</button>
+  <button class="tab" data-tab="weekly" type="button"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><circle cx="8" cy="14" r="1.5" fill="currentColor"/><circle cx="13" cy="14" r="1.5" fill="currentColor"/><circle cx="18" cy="14" r="1.5" fill="currentColor"/></svg>Weekly Status</button>
   <button class="tab" data-tab="drilldown" type="button"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Drill-down</button>
   <button class="tab" data-tab="matrix" type="button"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Workflow Matrix</button>
   <button class="tab" data-tab="datewise" type="button"><svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>Date-wise</button>
@@ -537,6 +638,7 @@ table.ct-tasks-table .slip-pending{color:var(--ink-3)}
 
 <main class="app">
   <section id="tab-narrative" class="tab-panel active"></section>
+  <section id="tab-weekly" class="tab-panel"></section>
   <section id="tab-drilldown" class="tab-panel"></section>
   <section id="tab-matrix"    class="tab-panel"></section>
   <section id="tab-datewise"  class="tab-panel"></section>
@@ -1217,6 +1319,10 @@ function setActiveTab(name) {
   if (name === 'coursetracker' && typeof renderCourseTracker === 'function') {
     renderCourseTracker();
   }
+  if (name === 'weekly' && typeof renderWeeklyStatus === 'function') {
+    ensureWeeklyStatusLoaded();
+    renderWeeklyStatus();
+  }
   // Keep the sticky tab bar locked at the top when switching tabs while scrolled.
   // - If the page is scrolled past the brand bar, snap to the brand-bar bottom
   //   so the sticky nav sits at the top of the viewport and the new tab's
@@ -1272,6 +1378,7 @@ function wireUi() {
 function renderAll() {
   destroyCharts();
   renderNarrative();
+  renderWeeklyStatus();
   renderDrilldown();
   renderMatrix();
   renderDatewise();
@@ -2587,6 +2694,497 @@ function renderCourseTracker() {
   tWrap.appendChild(tbl);
   taskCard.appendChild(tWrap);
   host.appendChild(taskCard);
+}
+
+
+
+/* ============================================================
+ * WEEKLY STATUS TAB
+ * Pulls Weekly-Update__2 via JSONP mode=weeklyStatus on first
+ * tab activation. Caches in localStorage. Auto-refreshes every
+ * 5 minutes while the tab is alive.
+ * ============================================================ */
+var WS_STATE = {
+  data: null,           // { headers, rows: [{...}], fetchedAt }
+  loading: false,
+  error: null,
+  autoTimer: null,
+  filters: { q: '', rag: '', batch: '', owner: '', status: '' },
+  expanded: {},         // map of sr_no -> bool
+  sort: { col: 'sr_no', dir: 'asc' }
+};
+var WS_AUTO_REFRESH_MS = 5 * 60 * 1000;
+
+function ragKind(v) {
+  var s = String(v || '').trim().toLowerCase();
+  if (s === 'on track') return 'green';
+  if (s === 'delayed') return 'amber';
+  if (s === 'off track') return 'red';
+  return 'grey';
+}
+
+
+function wsCmp(a, b, col, dir) {
+  var av, bv;
+  if (col === 'sr_no')        { av = Number(a.sr_no) || 0; bv = Number(b.sr_no) || 0; }
+  else if (col === 'code')    { av = (a.course_code || '').toLowerCase(); bv = (b.course_code || '').toLowerCase(); }
+  else if (col === 'batch')   { av = (a.batch || '').toLowerCase(); bv = (b.batch || '').toLowerCase(); }
+  else if (col === 'id_name') { av = (a.id_name || '').toLowerCase(); bv = (b.id_name || '').toLowerCase(); }
+  else if (col === 'alpha')   { av = a.alpha_date ? a.alpha_date.getTime() : 0; bv = b.alpha_date ? b.alpha_date.getTime() : 0; }
+  else if (col === 'status')  { av = (a.current_status || '').toLowerCase(); bv = (b.current_status || '').toLowerCase(); }
+  else if (col === 'rag')     {
+    var rank = { red: 0, amber: 1, green: 2, grey: 3 };
+    av = rank[ragKind(a.rag)];
+    bv = rank[ragKind(b.rag)];
+  } else { return 0; }
+  if (av < bv) return dir === 'asc' ? -1 : 1;
+  if (av > bv) return dir === 'asc' ? 1 : -1;
+  // Tiebreaker: course code asc
+  var ta = (a.course_code || '').toLowerCase(), tb = (b.course_code || '').toLowerCase();
+  if (ta < tb) return -1;
+  if (ta > tb) return 1;
+  return 0;
+}
+
+function wsHeader(label, col) {
+  var s = WS_STATE.sort;
+  var isActive = s.col === col;
+  var arrow = isActive ? (s.dir === 'asc' ? '▲' : '▼') : '▲▼';
+  var th = el('th', { class: 'ws-sortable' + (isActive ? ' active' : ''), title: 'Click to sort by ' + label },
+    label, el('span', { class: 'ws-sort-arrow' }, arrow)
+  );
+  th.addEventListener('click', function() {
+    if (s.col === col) { s.dir = s.dir === 'asc' ? 'desc' : 'asc'; }
+    else { s.col = col; s.dir = 'asc'; }
+    renderWeeklyStatus();
+  });
+  return th;
+}
+
+function parseWeeklyStatus(raw) {
+  if (!raw || !raw.length) return { headers: [], rows: [] };
+  var header = raw[0] || [];
+  var hi = {};
+  header.forEach(function(h, i){
+    var k = String(h || '').trim();
+    hi[k] = i;
+  });
+  function col(row, name) {
+    var i = hi[name];
+    if (i == null || i < 0) return '';
+    var v = row[i];
+    if (v == null) return '';
+    return v;
+  }
+  var rows = [];
+  for (var r = 1; r < raw.length; r++) {
+    var row = raw[r] || [];
+    var srNo = row[hi['Sr. No.']];
+    if (srNo === '' || srNo == null) continue;
+    rows.push({
+      sr_no: srNo,
+      batch: String(col(row, 'Batch #') || '').trim(),
+      course_type: String(col(row, 'New / Uplift') || '').trim(),
+      college: String(col(row, 'College') || '').trim(),
+      subject: String(col(row, 'Subject') || '').trim(),
+      course_num: String(col(row, 'Course') || '').trim(),
+      course_code: String(col(row, 'Course Code') || '').trim(),
+      course_name: String(col(row, 'Course Name') || '').trim(),
+      term: String(col(row, 'Term') || '').trim(),
+      faculty: String(col(row, 'Faculty Name') || '').trim(),
+      id_name: String(col(row, 'LM ID') || '').trim(),
+      sme: String(col(row, 'SME') || '').trim(),
+      alpha_date: toDate(col(row, 'LM Alpha Delivery Date')),
+      current_status: String(col(row, 'Current Status') || '').trim(),
+      status_detail: String(col(row, 'Status in Detail') || '').trim(),
+      dependency: String(col(row, 'Course Dependency') || '').trim(),
+      rag: String(col(row, 'RAG Status') || '').trim()
+    });
+  }
+  return { headers: header.map(function(h){return String(h||'').trim();}), rows: rows };
+}
+
+function loadWeeklyStatus(force) {
+  if (WS_STATE.loading) return;
+  if (WS_STATE.data && !force) return;
+  WS_STATE.loading = true;
+  WS_STATE.error = null;
+  if (document.querySelector('#tab-weekly.active')) renderWeeklyStatus();
+
+  jsonpFetch({ mode: 'weeklyStatus' }, function(err, payload) {
+    WS_STATE.loading = false;
+    if (err) {
+      WS_STATE.error = err.message;
+      if (document.querySelector('#tab-weekly.active')) renderWeeklyStatus();
+      return;
+    }
+    var parsed = parseWeeklyStatus(payload.rows);
+    WS_STATE.data = {
+      headers: parsed.headers,
+      rows: parsed.rows,
+      fetchedAt: payload.fetchedAt
+    };
+    try {
+      localStorage.setItem('oue06_weeklyStatus', JSON.stringify({
+        raw: payload.rows, fetchedAt: payload.fetchedAt
+      }));
+    } catch (e) {}
+    if (document.querySelector('#tab-weekly.active')) renderWeeklyStatus();
+  });
+}
+
+function startWeeklyStatusAutoRefresh() {
+  if (WS_STATE.autoTimer) return;
+  WS_STATE.autoTimer = setInterval(function() {
+    loadWeeklyStatus(true);
+  }, WS_AUTO_REFRESH_MS);
+}
+
+function ensureWeeklyStatusLoaded() {
+  if (WS_STATE.data === null && !WS_STATE.loading) {
+    try {
+      var cached = localStorage.getItem('oue06_weeklyStatus');
+      if (cached) {
+        var saved = JSON.parse(cached);
+        if (saved && Array.isArray(saved.raw)) {
+          var parsed = parseWeeklyStatus(saved.raw);
+          WS_STATE.data = { headers: parsed.headers, rows: parsed.rows, fetchedAt: saved.fetchedAt };
+        }
+      }
+    } catch (e) {}
+    loadWeeklyStatus();
+  }
+  startWeeklyStatusAutoRefresh();
+}
+
+function renderWeeklyStatus() {
+  var host = $('tab-weekly');
+  // Preserve the inner-table scroll position across re-renders so
+  // expanding a row (or sorting/filtering) doesn't snap the user
+  // back to the top of the table.
+  var __ws_savedScroll = 0;
+  var __ws_oldWrap = host.querySelector('.ws-table-wrap');
+  if (__ws_oldWrap) __ws_savedScroll = __ws_oldWrap.scrollTop;
+  host.innerHTML = '';
+
+  host.appendChild(hero(
+    'Weekly Status',
+    'Leadership-level weekly narrative',
+    'narrative',
+    'Curated weekly status across all courses with RAG, current stage, status narrative, and blockers. Live from the Weekly-Update__2 sheet. Auto-refreshes every 5 minutes.',
+    []
+  ));
+
+  // ----- Status bar -----
+  var d = WS_STATE.data;
+  var dotCls = WS_STATE.loading ? 'loading' : (WS_STATE.error ? 'error' : 'ok');
+  var lastSync = d && d.fetchedAt ? new Date(d.fetchedAt).toLocaleTimeString() : '—';
+
+  // Compute counts
+  var counts = { green: 0, amber: 0, red: 0, grey: 0, total: 0 };
+  if (d && d.rows) {
+    d.rows.forEach(function(r){ counts.total++; counts[ragKind(r.rag)]++; });
+  }
+
+  var refreshBtn = el('button', { class: 'btn primary', type: 'button' }, '↻ Refresh');
+  refreshBtn.addEventListener('click', function(){ loadWeeklyStatus(true); });
+
+  var statusBar = el('div', { class: 'ws-status-bar' },
+    el('div', { class: 'ws-status-pill' },
+      el('div', { class: 'ws-status-dot ' + dotCls }),
+      WS_STATE.loading ? 'Loading…' : (WS_STATE.error ? 'Fetch failed' : ('Synced ' + lastSync))
+    ),
+    counts.total ? el('span', { class: 'ws-mini-chip green' },
+      el('span', { class: 'dot' }), String(counts.green) + ' on track') : null,
+    counts.total ? el('span', { class: 'ws-mini-chip amber' },
+      el('span', { class: 'dot' }), String(counts.amber) + ' delayed') : null,
+    counts.total ? el('span', { class: 'ws-mini-chip red' },
+      el('span', { class: 'dot' }), String(counts.red) + ' off track') : null,
+    counts.grey > 0 ? el('span', { class: 'ws-mini-chip' },
+      el('span', { class: 'dot', style: 'background:var(--ink-3)' }), String(counts.grey) + ' unset') : null,
+    el('div', { class: 'ws-spacer' }),
+    refreshBtn
+  );
+  host.appendChild(statusBar);
+
+  if (WS_STATE.error) {
+    host.appendChild(el('div', { class: 'card', style: 'padding:18px;color:var(--risk);background:var(--risk-bg);border:1px solid var(--risk)' },
+      el('b', null, 'Fetch failed: '), WS_STATE.error,
+      ' — make sure the Apps Script has been redeployed with the new ', el('code', null, 'mode=weeklyStatus'), ' handler.'
+    ));
+    return;
+  }
+
+  if (!d) {
+    host.appendChild(el('div', { class: 'card', style: 'text-align:center;padding:40px;color:var(--ink-3)' },
+      el('span', { class: 'spin', style: 'display:inline-block;width:18px;height:18px;border:2px solid rgba(132,22,23,0.2);border-top-color:var(--ou-crimson);border-radius:50%;animation:spin 0.8s linear infinite;vertical-align:middle;margin-right:10px' }),
+      'Loading weekly status from Google Sheets…'
+    ));
+    return;
+  }
+
+  // ----- KPI strip -----
+  function pct(n){ return counts.total ? Math.round(100 * n / counts.total) + '%' : '0%'; }
+  host.appendChild(el('div', { class: 'kpi-row cols-4' },
+    kpiCard('Total courses',  String(counts.total), 'In Weekly-Update__2'),
+    kpiCard('On track',       String(counts.green), pct(counts.green) + ' of total \u00B7 RAG = On Track',  counts.green ? 'good' : null),
+    kpiCard('Delayed',        String(counts.amber), pct(counts.amber) + ' of total \u00B7 RAG = Delayed',   counts.amber ? 'warn' : null),
+    kpiCard('Off track',      String(counts.red),   pct(counts.red)   + ' of total \u00B7 RAG = Off Track', counts.red   ? 'risk' : null)
+  ));
+
+  // ----- Stacked RAG bar -----
+  if (counts.total > 0) {
+    function ws_pct(n){ return counts.total ? (n / counts.total * 100).toFixed(1) + '%' : '0%'; }
+    var bar = el('div', { class: 'ws-rag-bar' });
+    if (counts.green) bar.appendChild(el('div', { class: 'seg green', style: 'flex-basis:' + ws_pct(counts.green), title: counts.green + ' on track' }, counts.green + ' On Track'));
+    if (counts.amber) bar.appendChild(el('div', { class: 'seg amber', style: 'flex-basis:' + ws_pct(counts.amber), title: counts.amber + ' delayed' }, counts.amber + ' Delayed'));
+    if (counts.red)   bar.appendChild(el('div', { class: 'seg red',   style: 'flex-basis:' + ws_pct(counts.red),   title: counts.red + ' off track' }, counts.red + ' Off Track'));
+    if (counts.grey)  bar.appendChild(el('div', { class: 'seg grey',  style: 'flex-basis:' + ws_pct(counts.grey),  title: counts.grey + ' RAG unset' }, counts.grey + ' Unset'));
+    host.appendChild(bar);
+  }
+
+  // ----- Filter bar -----
+  var f = WS_STATE.filters;
+  var rows = d.rows;
+  var batches = uniq(compact(rows.map(function(r){ return r.batch; }))).sort();
+  var owners  = uniq(compact(rows.map(function(r){ return r.id_name; }))).sort();
+  var statuses = uniq(compact(rows.map(function(r){ return r.current_status; }))).sort();
+
+  function makeSelect(label, key, options, allText){
+    var sel = el('select', null, el('option', { value: '' }, allText),
+      options.map(function(o){
+        var attrs = { value: o };
+        if (f[key] === o) attrs.selected = 'selected';
+        return el('option', attrs, o);
+      })
+    );
+    sel.addEventListener('change', function(){ f[key] = sel.value; renderWeeklyStatus(); });
+    return el('label', null, label, sel);
+  }
+  var search = el('input', { type: 'search', placeholder: 'Course / owner / status…', value: f.q });
+  search.addEventListener('input', function(){
+    f.q = search.value;
+    renderWeeklyStatus();
+    setTimeout(function(){
+      var s = document.querySelector('.ws-filter-bar input[type=search]');
+      if (s){ s.focus(); s.setSelectionRange(s.value.length, s.value.length); }
+    }, 0);
+  });
+  var ragSelect = el('select', null,
+    el('option', { value: '', selected: f.rag === '' ? 'selected' : null }, 'All RAG'),
+    el('option', { value: 'On Track', selected: f.rag === 'On Track' ? 'selected' : null }, 'On Track'),
+    el('option', { value: 'Delayed', selected: f.rag === 'Delayed' ? 'selected' : null }, 'Delayed'),
+    el('option', { value: 'Off Track', selected: f.rag === 'Off Track' ? 'selected' : null }, 'Off Track'),
+    el('option', { value: '__blank__', selected: f.rag === '__blank__' ? 'selected' : null }, '(RAG unset)')
+  );
+  ragSelect.addEventListener('change', function(){ f.rag = ragSelect.value; renderWeeklyStatus(); });
+
+  var resetBtn = el('button', { class: 'ws-reset', type: 'button' }, 'Reset');
+  resetBtn.addEventListener('click', function(){
+    WS_STATE.filters = { q: '', rag: '', batch: '', owner: '', status: '' };
+    renderWeeklyStatus();
+  });
+
+  host.appendChild(el('div', { class: 'ws-filter-bar' },
+    el('label', null, 'Search', search),
+    el('label', null, 'RAG', ragSelect),
+    makeSelect('Batch', 'batch', batches, 'All batches'),
+    makeSelect('Owner (ID)', 'owner', owners, 'All owners'),
+    makeSelect('Current Status', 'status', statuses, 'All statuses'),
+    resetBtn
+  ));
+
+  // ----- Apply filters -----
+  var filtered = rows.filter(function(r){
+    if (f.q) {
+      var q = f.q.toLowerCase();
+      var hay = ((r.course_code||'') + ' ' + (r.course_name||'') + ' ' + (r.id_name||'') + ' ' + (r.current_status||'') + ' ' + (r.batch||'') + ' ' + (r.faculty||'') + ' ' + (r.sme||'')).toLowerCase();
+      if (hay.indexOf(q) < 0) return false;
+    }
+    if (f.rag) {
+      if (f.rag === '__blank__') { if (r.rag) return false; }
+      else if (r.rag !== f.rag) return false;
+    }
+    if (f.batch && r.batch !== f.batch) return false;
+    if (f.owner && r.id_name !== f.owner) return false;
+    if (f.status && r.current_status !== f.status) return false;
+    return true;
+  });
+
+  // ----- Risk panel (Off Track + Delayed, only when no RAG filter set) -----
+  var riskRows = rows.filter(function(r){ return ragKind(r.rag) === 'red' || ragKind(r.rag) === 'amber'; });
+  riskRows.sort(function(a, b){
+    var ar = ragKind(a.rag), br = ragKind(b.rag);
+    if (ar === br) return (a.course_code || '').localeCompare(b.course_code || '');
+    return ar === 'red' ? -1 : 1;
+  });
+  if (riskRows.length && !f.rag && !f.batch && !f.owner && !f.status && !f.q) {
+    var riskCard = el('div', { class: 'ws-risk-card' });
+    riskCard.appendChild(el('div', { class: 'ws-risk-head' },
+      el('h3', null, 'Needs attention this week (' + riskRows.length + ')'),
+      el('div', { class: 'ws-risk-sub' }, 'Off Track first, then Delayed. Click any course code to open it in the Drill-down tab.')
+    ));
+    var list = el('div', { class: 'ws-risk-list' });
+    riskRows.forEach(function(r){
+      var kind = ragKind(r.rag);
+      var rowEl = el('div', { class: 'ws-risk-row ' + (kind === 'red' ? 'off-track' : 'delayed') });
+      var codeSpan = el('span', { class: 'ws-risk-code', title: 'Open in Drill-down' }, r.course_code || ('#' + r.sr_no));
+      codeSpan.addEventListener('click', function(){ navigateToDrilldown(r.sr_no); });
+      rowEl.appendChild(el('div', { class: 'ws-risk-meta' },
+        codeSpan,
+        ' ',
+        el('span', { class: 'ws-rag-pill ' + kind }, r.rag || '—'),
+        el('div', { class: 'ws-risk-name' }, r.course_name || ''),
+        el('div', { class: 'ws-risk-owner' },
+          el('div', null, el('b', null, 'ID: '),    (r.id_name || '—')),
+          el('div', null, el('b', null, 'Alpha: '), (r.alpha_date ? shortDate(r.alpha_date) : '—')),
+          el('div', null, el('b', null, 'Batch: '), (r.batch || '—'))
+        )
+      ));
+      var detail = el('div', { class: 'ws-risk-detail' });
+      detail.appendChild(el('div', { class: 'ws-risk-status-line' },
+        el('b', null, 'Current: '), el('span', null, r.current_status || '—')
+      ));
+      if (r.status_detail) detail.appendChild(el('div', { class: 'ws-risk-narr' }, r.status_detail));
+      if (r.dependency) detail.appendChild(el('div', { class: 'ws-risk-dep' }, r.dependency));
+      rowEl.appendChild(detail);
+      list.appendChild(rowEl);
+    });
+    riskCard.appendChild(list);
+    host.appendChild(riskCard);
+  }
+
+  // ----- Full table -----
+  var card = el('div', { class: 'ws-table-card' });
+  var exportXls = el('button', { class: 'btn primary', type: 'button' }, '⤓ Excel');
+  exportXls.addEventListener('click', function(){
+    var hdrs = ['#','Course Code','Course Name','Batch','LM ID','Faculty','Alpha Delivery','Current Status','RAG','Status in Detail','Course Dependency'];
+    var data = filtered.map(function(r, i){
+      return [i+1, r.course_code, r.course_name, r.batch, r.id_name, r.faculty,
+              r.alpha_date ? isoDate(r.alpha_date) : '',
+              r.current_status, r.rag, r.status_detail, r.dependency];
+    });
+    exportToExcel(data, hdrs, 'Weekly Status', 'OUE06_weekly_status');
+  });
+  var exportCsv = el('button', { class: 'btn', type: 'button' }, 'CSV');
+  exportCsv.addEventListener('click', function(){
+    var hdrs = ['#','Course Code','Course Name','Batch','LM ID','Faculty','Alpha Delivery','Current Status','RAG','Status in Detail','Course Dependency'];
+    var data = [hdrs].concat(filtered.map(function(r, i){
+      return [i+1, r.course_code, r.course_name, r.batch, r.id_name, r.faculty,
+              r.alpha_date ? isoDate(r.alpha_date) : '',
+              r.current_status, r.rag, r.status_detail, r.dependency];
+    }));
+    var csv = data.map(function(row){
+      return row.map(function(c){
+        var s = c == null ? '' : String(c);
+        if (s.indexOf(',') >= 0 || s.indexOf('"') >= 0 || s.indexOf('\n') >= 0) s = '"' + s.replace(/"/g,'""') + '"';
+        return s;
+      }).join(',');
+    }).join('\n');
+    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'OUE06_weekly_status_' + isoDate(new Date()) + '.csv';
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+  // Quick-filter chips for RAG (one-click filter)
+  var chipRow = el('div', { class: 'ws-rag-chip-row' });
+  chipRow.appendChild(el('span', { class: 'ws-chip-label' }, 'Quick filter'));
+  function chip(label, val, kind, count) {
+    var c = el('button', { class: 'ws-rag-chip' + (kind ? ' ' + kind : '') + (f.rag === val ? ' active' : ''), type: 'button' },
+      el('span', { class: 'dot' }), label, ' (' + count + ')'
+    );
+    c.addEventListener('click', function(){ f.rag = (f.rag === val ? '' : val); renderWeeklyStatus(); });
+    return c;
+  }
+  chipRow.appendChild(chip('All', '', null, rows.length));
+  chipRow.appendChild(chip('On Track',  'On Track',  'green', counts.green));
+  chipRow.appendChild(chip('Delayed',   'Delayed',   'amber', counts.amber));
+  chipRow.appendChild(chip('Off Track', 'Off Track', 'red',   counts.red));
+  if (counts.grey) chipRow.appendChild(chip('Unset', '__blank__', null, counts.grey));
+  card.appendChild(chipRow);
+
+  card.appendChild(el('div', { class: 'ws-table-controls' },
+    el('span', { class: 'ws-count' }, 'Showing ' + filtered.length + ' of ' + rows.length + ' courses'),
+    el('div', { class: 'ws-export' }, exportXls, exportCsv)
+  ));
+
+  // Apply sort
+  var sort = WS_STATE.sort;
+  filtered.sort(function(a, b){ return wsCmp(a, b, sort.col, sort.dir); });
+
+  var wrap = el('div', { class: 'ws-table-wrap' });
+  var tbl = el('table', { class: 'ws-table' });
+  tbl.appendChild(el('thead', null, el('tr', null,
+    el('th', null, ''),
+    wsHeader('#', 'sr_no'),
+    wsHeader('Course', 'code'),
+    wsHeader('Batch', 'batch'),
+    wsHeader('LM ID', 'id_name'),
+    wsHeader('Alpha Delivery', 'alpha'),
+    wsHeader('Current Status', 'status'),
+    wsHeader('RAG', 'rag')
+  )));
+  var tb = el('tbody');
+  filtered.forEach(function(r, i){
+    var isExpanded = !!WS_STATE.expanded[r.sr_no];
+    var kind = ragKind(r.rag);
+    var chev = el('span', { class: 'ws-expand-toggle' + (isExpanded ? ' open' : '') }, '›');
+    var codeSpan = el('span', { class: 'ws-code', title: 'Open in Drill-down' }, r.course_code || ('#' + r.sr_no));
+    codeSpan.addEventListener('click', function(e){ e.stopPropagation(); navigateToDrilldown(r.sr_no); });
+    var tr = el('tr', isExpanded ? { class: 'ws-expanded' } : null,
+      el('td', { style: 'cursor:pointer;width:24px' }, chev),
+      el('td', null, String(i + 1)),
+      el('td', null,
+        codeSpan,
+        el('div', { class: 'ws-name' }, r.course_name || '')
+      ),
+      el('td', null, r.batch || '—'),
+      el('td', null, r.id_name || '—'),
+      el('td', null, r.alpha_date ? shortDate(r.alpha_date) : '—'),
+      el('td', { class: 'ws-current-status', title: r.current_status }, r.current_status || '—'),
+      el('td', null, el('span', { class: 'ws-rag-pill ' + kind }, r.rag || '—'))
+    );
+    tr.addEventListener('click', function(e){
+      // ignore clicks on the course code (handled separately)
+      if (e.target && e.target.classList && e.target.classList.contains('ws-code')) return;
+      WS_STATE.expanded[r.sr_no] = !WS_STATE.expanded[r.sr_no];
+      renderWeeklyStatus();
+    });
+    tb.appendChild(tr);
+    if (isExpanded) {
+      tb.appendChild(el('tr', { class: 'ws-expand-row' },
+        el('td', { colSpan: 8 },
+          el('div', { class: 'ws-expand-block' },
+            el('div', null,
+              el('h4', null, 'Status in Detail'),
+              el('div', { class: 'ws-expand-narr' }, r.status_detail || '(no detail provided)')
+            ),
+            el('div', null,
+              el('h4', null, 'Course Dependency / Blockers'),
+              el('div', { class: 'ws-expand-dep' + (r.dependency ? '' : ' empty') }, r.dependency || 'None recorded')
+            )
+          )
+        )
+      ));
+    }
+  });
+  if (filtered.length === 0) {
+    tb.appendChild(el('tr', null, el('td', { colSpan: 8, style: 'text-align:center;color:var(--ink-3);padding:24px' }, 'No courses match the current filters.')));
+  }
+  tbl.appendChild(tb);
+  wrap.appendChild(tbl);
+  card.appendChild(wrap);
+  host.appendChild(card);
+
+  // Restore the inner-table scroll position now that the new table is in the DOM.
+  // requestAnimationFrame is belt-and-suspenders so layout has settled before we set scrollTop.
+  if (__ws_savedScroll > 0) {
+    requestAnimationFrame(function(){
+      var __ws_newWrap = host.querySelector('.ws-table-wrap');
+      if (__ws_newWrap) __ws_newWrap.scrollTop = __ws_savedScroll;
+    });
+  }
 }
 
 
