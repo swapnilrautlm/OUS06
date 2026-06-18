@@ -547,6 +547,9 @@ table.ct-tasks-table .slip-pending{color:var(--ink-3)}
 .ws-table .ws-dependency{font-size:11px;color:var(--ink-2);white-space:pre-wrap;line-height:1.45;max-width:240px;min-width:160px}
 .ws-table .ws-dependency.has-content{color:var(--risk);background:#FDF4F5;border-left:3px solid var(--risk);padding-left:8px}
 .ws-table .ws-muted{color:var(--ink-3);font-style:italic}
+.ws-blueprint-due{font-weight:600;font-size:11px;white-space:nowrap;padding:3px 8px;border-radius:4px;display:inline-block;color:var(--review);background:#E8F0F7;border:1px solid #C8DCE8}
+.ws-blueprint-due.past{color:var(--risk);background:#FBE4E5;border-color:var(--risk)}
+.ws-blueprint-due.future{color:var(--good);background:#EBF1E6;border-color:var(--good)}
 .ws-table tbody td{vertical-align:top}
 .ws-table .ws-name{margin-top:2px}
 table.ws-table{width:100%;border-collapse:collapse;font-size:12px}
@@ -2717,6 +2720,26 @@ function ragKind(v) {
 }
 
 
+
+function wsBlueprintDue(courseCode) {
+  if (!DATA || !DATA.rows || !courseCode) return null;
+  var key = String(courseCode).trim().toLowerCase();
+  if (!key) return null;
+  if (!WS_STATE._bpCache || WS_STATE._bpCacheDataRef !== DATA) {
+    WS_STATE._bpCache = {};
+    WS_STATE._bpCacheDataRef = DATA;
+    DATA.rows.forEach(function(r){
+      var k = String(r.course_code || '').trim().toLowerCase();
+      if (k) WS_STATE._bpCache[k] = r;
+    });
+  }
+  var m = WS_STATE._bpCache[key];
+  if (!m || !m.stages || !m.stages[4]) return null;
+  var s = m.stages[4];
+  if (s.sCls !== 'wip' && s.sCls !== 'review') return null;
+  return s.planned || null;
+}
+
 function wsCmp(a, b, col, dir) {
   var av, bv;
   if (col === 'sr_no')        { av = Number(a.sr_no) || 0; bv = Number(b.sr_no) || 0; }
@@ -2725,6 +2748,11 @@ function wsCmp(a, b, col, dir) {
   else if (col === 'id_name') { av = (a.id_name || '').toLowerCase(); bv = (b.id_name || '').toLowerCase(); }
   else if (col === 'alpha')   { av = a.alpha_date ? a.alpha_date.getTime() : 0; bv = b.alpha_date ? b.alpha_date.getTime() : 0; }
   else if (col === 'status')  { av = (a.current_status || '').toLowerCase(); bv = (b.current_status || '').toLowerCase(); }
+  else if (col === 'blueprint') {
+    var ad = wsBlueprintDue(a.course_code); var bd = wsBlueprintDue(b.course_code);
+    av = ad ? ad.getTime() : (dir === 'asc' ? Number.POSITIVE_INFINITY : -1);
+    bv = bd ? bd.getTime() : (dir === 'asc' ? Number.POSITIVE_INFINITY : -1);
+  }
   else if (col === 'rag')     {
     var rank = { red: 0, amber: 1, green: 2, grey: 3 };
     av = rank[ragKind(a.rag)];
@@ -3031,7 +3059,18 @@ function renderWeeklyStatus() {
         el('div', { class: 'ws-risk-owner' },
           el('div', null, el('b', null, 'ID: '),    (r.id_name || '—')),
           el('div', null, el('b', null, 'Alpha: '), (r.alpha_date ? shortDate(r.alpha_date) : '—')),
-          el('div', null, el('b', null, 'Batch: '), (r.batch || '—'))
+          el('div', null, el('b', null, 'Batch: '), (r.batch || '—')),
+          (function(){
+            var bp = wsBlueprintDue(r.course_code);
+            if (!bp) return null;
+            var t = new Date(); t.setHours(0,0,0,0);
+            var d = new Date(bp); d.setHours(0,0,0,0);
+            var bpKind = d < t ? 'past' : 'future';
+            return el('div', null,
+              el('b', null, 'Blueprint Due: '),
+              el('span', { class: 'ws-blueprint-due ' + bpKind, title: bpKind === 'past' ? 'PAST DUE' : 'on track' }, shortDate(bp))
+            );
+          })()
         )
       ));
       var detail = el('div', { class: 'ws-risk-detail' });
@@ -3051,20 +3090,24 @@ function renderWeeklyStatus() {
   var card = el('div', { class: 'ws-table-card' });
   var exportXls = el('button', { class: 'btn primary', type: 'button' }, '⤓ Excel');
   exportXls.addEventListener('click', function(){
-    var hdrs = ['#','Course Code','Course Name','Batch','LM ID','Faculty','Alpha Delivery','Current Status','RAG','Status in Detail','Course Dependency'];
+    var hdrs = ['#','Course Code','Course Name','Batch','LM ID','Faculty','Alpha Delivery','Blueprint Approval Due','Current Status','RAG','Status in Detail','Course Dependency'];
     var data = filtered.map(function(r, i){
+      var bp = wsBlueprintDue(r.course_code);
       return [i+1, r.course_code, r.course_name, r.batch, r.id_name, r.faculty,
               r.alpha_date ? isoDate(r.alpha_date) : '',
+              bp ? isoDate(bp) : '',
               r.current_status, r.rag, r.status_detail, r.dependency];
     });
     exportToExcel(data, hdrs, 'Weekly Status', 'OUE06_weekly_status');
   });
   var exportCsv = el('button', { class: 'btn', type: 'button' }, 'CSV');
   exportCsv.addEventListener('click', function(){
-    var hdrs = ['#','Course Code','Course Name','Batch','LM ID','Faculty','Alpha Delivery','Current Status','RAG','Status in Detail','Course Dependency'];
+    var hdrs = ['#','Course Code','Course Name','Batch','LM ID','Faculty','Alpha Delivery','Blueprint Approval Due','Current Status','RAG','Status in Detail','Course Dependency'];
     var data = [hdrs].concat(filtered.map(function(r, i){
+      var bp = wsBlueprintDue(r.course_code);
       return [i+1, r.course_code, r.course_name, r.batch, r.id_name, r.faculty,
               r.alpha_date ? isoDate(r.alpha_date) : '',
+              bp ? isoDate(bp) : '',
               r.current_status, r.rag, r.status_detail, r.dependency];
     }));
     var csv = data.map(function(row){
@@ -3114,6 +3157,7 @@ function renderWeeklyStatus() {
     wsHeader('Batch', 'batch'),
     wsHeader('LM ID', 'id_name'),
     wsHeader('Alpha Delivery', 'alpha'),
+    wsHeader('Blueprint Approval Due', 'blueprint'),
     wsHeader('Current Status', 'status'),
     el('th', null, 'Status in Detail'),
     el('th', null, 'Course Dependency / Blockers'),
@@ -3133,6 +3177,18 @@ function renderWeeklyStatus() {
       el('td', null, r.batch || '—'),
       el('td', null, r.id_name || '—'),
       el('td', null, r.alpha_date ? shortDate(r.alpha_date) : '—'),
+      (function(){
+        var bp = wsBlueprintDue(r.course_code);
+        if (bp) {
+          var t = new Date(); t.setHours(0,0,0,0);
+          var d = new Date(bp); d.setHours(0,0,0,0);
+          var kind = d < t ? 'past' : 'future';
+          var tip = 'Stage 5 (Blueprint) In Progress · ' + (kind === 'past' ? 'PAST DUE' : 'on track');
+          return el('td', null, el('span', { class: 'ws-blueprint-due ' + kind, title: tip }, shortDate(bp)));
+        }
+        if (!DATA) return el('td', null, el('span', { class: 'ws-muted' }, '…'));
+        return el('td', null, el('span', { class: 'ws-muted' }, '—'));
+      })(),
       el('td', { class: 'ws-current-status', title: r.current_status }, r.current_status || '—'),
       el('td', { class: 'ws-status-detail' }, r.status_detail || el('span', { class: 'ws-muted' }, '—')),
       el('td', { class: 'ws-dependency' + (r.dependency ? ' has-content' : '') },
@@ -3143,7 +3199,7 @@ function renderWeeklyStatus() {
     tb.appendChild(tr);
   });
   if (filtered.length === 0) {
-    tb.appendChild(el('tr', null, el('td', { colSpan: 9, style: 'text-align:center;color:var(--ink-3);padding:24px' }, 'No courses match the current filters.')));
+    tb.appendChild(el('tr', null, el('td', { colSpan: 10, style: 'text-align:center;color:var(--ink-3);padding:24px' }, 'No courses match the current filters.')));
   }
   tbl.appendChild(tb);
   wrap.appendChild(tbl);
