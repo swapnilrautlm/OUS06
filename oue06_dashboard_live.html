@@ -542,7 +542,13 @@ table.ct-tasks-table .slip-pending{color:var(--ink-3)}
 .ws-table-card .ws-table-controls{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .ws-table-card .ws-table-controls .ws-count{font-size:12px;color:var(--ink-3);font-weight:600}
 .ws-table-card .ws-table-controls .ws-export{margin-left:auto;display:flex;gap:6px}
-.ws-table-wrap{border:1px solid var(--line);border-radius:8px;overflow:hidden;max-height:600px;overflow-y:auto}
+.ws-table-wrap{border:1px solid var(--line);border-radius:8px;overflow:hidden;max-height:600px;overflow-y:auto;overflow-x:auto}
+.ws-table .ws-status-detail{font-size:11px;color:var(--ink-2);white-space:pre-wrap;line-height:1.45;max-width:340px;min-width:240px}
+.ws-table .ws-dependency{font-size:11px;color:var(--ink-2);white-space:pre-wrap;line-height:1.45;max-width:240px;min-width:160px}
+.ws-table .ws-dependency.has-content{color:var(--risk);background:#FDF4F5;border-left:3px solid var(--risk);padding-left:8px}
+.ws-table .ws-muted{color:var(--ink-3);font-style:italic}
+.ws-table tbody td{vertical-align:top}
+.ws-table .ws-name{margin-top:2px}
 table.ws-table{width:100%;border-collapse:collapse;font-size:12px}
 table.ws-table thead th{position:sticky;top:0;background:var(--ou-light-gray);color:var(--ink-2);padding:9px 10px;text-align:left;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;border-bottom:1px solid var(--line-2);z-index:2;white-space:nowrap}
 table.ws-table tbody td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
@@ -551,12 +557,6 @@ table.ws-table .ws-code{font-weight:700;color:var(--ou-crimson);cursor:pointer;w
 table.ws-table .ws-code:hover{text-decoration:underline}
 table.ws-table .ws-name{color:var(--ink-2);font-size:11px;margin-top:2px}
 table.ws-table .ws-current-status{font-size:11px;color:var(--ink-2);max-width:240px}
-table.ws-table tr.ws-expanded td{background:#FFFEFB}
-table.ws-table tr.ws-expand-row td{padding:12px 16px;background:#FBF8F1;border-bottom:1px solid var(--line-2)}
-.ws-expand-row .ws-expand-block{display:block;width:100%;box-sizing:border-box}
-.ws-expand-row .ws-expand-block > div{display:block;width:100%;box-sizing:border-box;margin-bottom:14px}
-.ws-expand-row .ws-expand-block > div:last-child{margin-bottom:0}
-.ws-expand-row .ws-expand-narr,.ws-expand-row .ws-expand-dep{display:block;width:100%;box-sizing:border-box}
 table.ws-table thead th.ws-sortable{cursor:pointer;user-select:none;transition:background 120ms ease}
 table.ws-table thead th.ws-sortable:hover{background:#E6E6DE}
 table.ws-table thead th.ws-sortable.active{color:var(--ou-crimson);background:#F2EAEA}
@@ -573,12 +573,6 @@ table.ws-table thead th.ws-sortable.active .ws-sort-arrow{opacity:1}
 .ws-rag-chip.active{background:var(--ou-crimson);color:#fff;border-color:var(--ou-crimson)}
 .ws-rag-chip.active .dot{background:#fff}
 .ws-risk-row .ws-risk-meta .ws-risk-owner > div{margin-top:2px}
-.ws-expand-row .ws-expand-block h4{font-size:10px;font-weight:700;color:var(--ink-3);letter-spacing:0.08em;text-transform:uppercase;margin:0 0 5px 0}
-.ws-expand-row .ws-expand-narr{font-size:12px;color:var(--ink-2);white-space:pre-wrap;line-height:1.5;background:var(--card);border:1px solid var(--line);padding:8px 10px;border-radius:5px}
-.ws-expand-row .ws-expand-dep{font-size:12px;color:var(--risk);background:var(--risk-bg);padding:8px 10px;border-radius:5px;border-left:3px solid var(--risk);white-space:pre-wrap}
-.ws-expand-row .ws-expand-dep.empty{color:var(--ink-3);background:var(--card);border:1px dashed var(--line-2);border-left-color:var(--line-2);font-style:italic}
-.ws-expand-toggle{cursor:pointer;color:var(--ink-3);user-select:none;font-size:14px;line-height:1;display:inline-block;width:18px;text-align:center;transition:transform 150ms ease}
-.ws-expand-toggle.open{transform:rotate(90deg);color:var(--ou-crimson)}
 
 </style>
 </head>
@@ -2710,7 +2704,6 @@ var WS_STATE = {
   error: null,
   autoTimer: null,
   filters: { q: '', rag: '', batch: '', owner: '', status: '' },
-  expanded: {},         // map of sr_no -> bool
   sort: { col: 'sr_no', dir: 'asc' }
 };
 var WS_AUTO_REFRESH_MS = 5 * 60 * 1000;
@@ -3116,24 +3109,22 @@ function renderWeeklyStatus() {
   var wrap = el('div', { class: 'ws-table-wrap' });
   var tbl = el('table', { class: 'ws-table' });
   tbl.appendChild(el('thead', null, el('tr', null,
-    el('th', null, ''),
     wsHeader('#', 'sr_no'),
     wsHeader('Course', 'code'),
     wsHeader('Batch', 'batch'),
     wsHeader('LM ID', 'id_name'),
     wsHeader('Alpha Delivery', 'alpha'),
     wsHeader('Current Status', 'status'),
+    el('th', null, 'Status in Detail'),
+    el('th', null, 'Course Dependency / Blockers'),
     wsHeader('RAG', 'rag')
   )));
   var tb = el('tbody');
   filtered.forEach(function(r, i){
-    var isExpanded = !!WS_STATE.expanded[r.sr_no];
     var kind = ragKind(r.rag);
-    var chev = el('span', { class: 'ws-expand-toggle' + (isExpanded ? ' open' : '') }, '›');
     var codeSpan = el('span', { class: 'ws-code', title: 'Open in Drill-down' }, r.course_code || ('#' + r.sr_no));
     codeSpan.addEventListener('click', function(e){ e.stopPropagation(); navigateToDrilldown(r.sr_no); });
-    var tr = el('tr', isExpanded ? { class: 'ws-expanded' } : null,
-      el('td', { style: 'cursor:pointer;width:24px' }, chev),
+    var tr = el('tr', null,
       el('td', null, String(i + 1)),
       el('td', null,
         codeSpan,
@@ -3143,34 +3134,16 @@ function renderWeeklyStatus() {
       el('td', null, r.id_name || '—'),
       el('td', null, r.alpha_date ? shortDate(r.alpha_date) : '—'),
       el('td', { class: 'ws-current-status', title: r.current_status }, r.current_status || '—'),
+      el('td', { class: 'ws-status-detail' }, r.status_detail || el('span', { class: 'ws-muted' }, '—')),
+      el('td', { class: 'ws-dependency' + (r.dependency ? ' has-content' : '') },
+        r.dependency || el('span', { class: 'ws-muted' }, '—')
+      ),
       el('td', null, el('span', { class: 'ws-rag-pill ' + kind }, r.rag || '—'))
     );
-    tr.addEventListener('click', function(e){
-      // ignore clicks on the course code (handled separately)
-      if (e.target && e.target.classList && e.target.classList.contains('ws-code')) return;
-      WS_STATE.expanded[r.sr_no] = !WS_STATE.expanded[r.sr_no];
-      renderWeeklyStatus();
-    });
     tb.appendChild(tr);
-    if (isExpanded) {
-      tb.appendChild(el('tr', { class: 'ws-expand-row' },
-        el('td', { colSpan: 8 },
-          el('div', { class: 'ws-expand-block' },
-            el('div', null,
-              el('h4', null, 'Status in Detail'),
-              el('div', { class: 'ws-expand-narr' }, r.status_detail || '(no detail provided)')
-            ),
-            el('div', null,
-              el('h4', null, 'Course Dependency / Blockers'),
-              el('div', { class: 'ws-expand-dep' + (r.dependency ? '' : ' empty') }, r.dependency || 'None recorded')
-            )
-          )
-        )
-      ));
-    }
   });
   if (filtered.length === 0) {
-    tb.appendChild(el('tr', null, el('td', { colSpan: 8, style: 'text-align:center;color:var(--ink-3);padding:24px' }, 'No courses match the current filters.')));
+    tb.appendChild(el('tr', null, el('td', { colSpan: 9, style: 'text-align:center;color:var(--ink-3);padding:24px' }, 'No courses match the current filters.')));
   }
   tbl.appendChild(tb);
   wrap.appendChild(tbl);
